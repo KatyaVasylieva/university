@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from optional_courses.models import Student, UniversityGroup
+from optional_courses.models import Student, UniversityGroup, Course
 
 
 @admin.register(Student)
@@ -27,3 +27,10 @@ class StudentAdmin(UserAdmin):
 @admin.register(UniversityGroup)
 class StudentGroupAdmin(admin.ModelAdmin):
     search_fields = ("short_name",)
+
+
+@admin.register(Course)
+class CourseAdmin(admin.ModelAdmin):
+    search_fields = ("title",)
+    list_filter = ("field",)
+
