@@ -29,3 +29,10 @@ class ModelTests(TestCase):
             specialization=self.specialization,
         )
         self.assertEqual(str(student_group), "IE-401")
+
+    def test_field_str(self):
+        self.assertEqual(str(self.field), "Math and logic")
+
+    def test_course_str(self):
+        self.assertEqual(str(self.course), "Combinatorial game theory")
+
