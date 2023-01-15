@@ -1,6 +1,7 @@
 from django.test import TestCase
 
-from optional_courses.models import Specialization, UniversityGroup, Field, Course
+from optional_courses.models import Specialization, UniversityGroup,\
+    Field, Course, Student
 
 
 class ModelTests(TestCase):
@@ -36,3 +37,18 @@ class ModelTests(TestCase):
     def test_course_str(self):
         self.assertEqual(str(self.course), "Combinatorial game theory")
 
+    def test_student_with_custom_fields_str(self):
+        student_group = UniversityGroup.objects.create(
+            short_name="IE-401",
+            specialization=self.specialization,
+        )
+        student = Student.objects.create(
+            username="ivan1234",
+            first_name="Ivan",
+            last_name="Harbuz",
+            group=student_group,
+        )
+        student.courses.set([self.course])
+        self.assertEqual(student.group, student_group)
+        self.assertEqual(student.courses.first(), self.course)
+        self.assertEqual(str(student), "Ivan Harbuz (ivan1234)")
