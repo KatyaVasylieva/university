@@ -1,0 +1,31 @@
+from django.test import TestCase
+
+from optional_courses.models import Specialization, UniversityGroup, Field, Course
+
+
+class ModelTests(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.specialization = Specialization.objects.create(
+            name="Economic cybernetics",
+            description="Economic systems, mathematical modeling"
+        )
+
+        cls.field = Field.objects.create(
+            name="Math and logic"
+        )
+
+        cls.course = Course.objects.create(
+            title="Combinatorial game theory"
+        )
+
+    def test_specialization_str(self):
+        self.assertEqual(str(self.specialization), "Economic cybernetics")
+
+    def test_university_group_str(self):
+        student_group = UniversityGroup.objects.create(
+            short_name="IE-401",
+            specialization=self.specialization,
+        )
+        self.assertEqual(str(student_group), "IE-401")
