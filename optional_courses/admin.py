@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from optional_courses.models import Student, UniversityGroup, Course
+from optional_courses.models import Student, UniversityGroup,\
+    Course, Specialization, Field
 
 
 @admin.register(Student)
@@ -34,3 +35,6 @@ class CourseAdmin(admin.ModelAdmin):
     search_fields = ("title",)
     list_filter = ("field",)
 
+
+admin.site.register(Specialization)
+admin.site.register(Field)
