@@ -86,3 +86,44 @@ class PrivateViewsTests(TestCase):
         )
         self.client = Client()
         self.client.force_login(self.user)
+
+    def test_index_correct_object_counting(self):
+        index_url = reverse("optional-courses:index")
+        response = self.client.get(index_url)
+        count_db_objects = {
+            "fields": Field.objects.count(),
+            "courses": Course.objects.count(),
+            "specializations": Specialization.objects.count(),
+            "groups": UniversityGroup.objects.count(),
+            "students": get_user_model().objects.count(),
+        }
+
+        self.assertEqual(
+            response.context["num_fields"],
+            count_db_objects["fields"]
+        )
+
+        self.assertEqual(
+            response.context["num_courses"],
+            count_db_objects["courses"]
+        )
+
+        self.assertEqual(
+            response.context["num_specializations"],
+            count_db_objects["specializations"]
+        )
+
+        self.assertEqual(
+            response.context["num_university_groups"],
+            count_db_objects["groups"]
+        )
+
+        self.assertEqual(
+            response.context["num_students"],
+            count_db_objects["students"]
+        )
+
+        self.assertEqual(
+            response.context["num_visits"],
+            1
+        )
