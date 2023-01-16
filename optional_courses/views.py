@@ -1,8 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from optional_courses.models import Field, Course, Specialization, UniversityGroup, Student
 
 
+@login_required
 def index(request):
     """View function for the home page of the site."""
 
