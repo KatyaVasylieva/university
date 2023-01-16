@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Optional Courses - Home page</h1>
+
+  <p>The university optional courses have the following record counts:</p>
+  <ul>
+    <li><strong>{{ num_students }}</strong> students are currently taking optional courses</li>
+    <li>Generally, {{ num_courses }} courses are available, all of them from <strong>{{ num_fields }}</strong> different fields of study</li>
+    <li>Student who are taking optional courses came from <strong>{{ num_university_groups }}</strong> groups of <strong>{{ num_specializations }}</strong> specializations</li>
+  </ul>
+
+  <p>You have visited this page
+    {{ num_visits }} time{{ num_visits|pluralize }}.
+  </p>
+
+{% endblock %}
