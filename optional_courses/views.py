@@ -1,7 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
-from optional_courses.models import Field, Course, Specialization, UniversityGroup, Student
+from optional_courses.models import Field, Course, Specialization, \
+    UniversityGroup
 
 
 @login_required
@@ -12,7 +14,7 @@ def index(request):
     num_courses = Course.objects.count()
     num_specializations = Specialization.objects.count()
     num_university_groups = UniversityGroup.objects.count()
-    num_students = Student.objects.count()
+    num_students = get_user_model().objects.count()
 
     num_visits = request.session.get("num_visits", 0)
     request.session["num_visits"] = num_visits + 1
