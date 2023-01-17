@@ -35,3 +35,7 @@ def index(request):
 
 class FieldListView(LoginRequiredMixin, generic.ListView):
     model = Field
+
+
+class FieldDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Field
