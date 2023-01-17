@@ -1,7 +1,14 @@
 from django.urls import path
 
-from optional_courses.views import index, FieldListView, FieldDetailView, \
-    CourseListView, CourseDetailView, toggle_course_assignment
+from optional_courses.views import (
+    index,
+    FieldListView,
+    FieldDetailView,
+    CourseListView,
+    CourseDetailView,
+    toggle_course_assignment,
+    CourseCreateView,
+)
 
 urlpatterns = [
     path("", index, name="index"),
@@ -17,6 +24,11 @@ urlpatterns = [
         "courses/<int:pk>/toggle-course-assignment/",
         toggle_course_assignment,
         name="toggle-course-assignment"
+    ),
+    path(
+        "courses/create/",
+        CourseCreateView.as_view(),
+        name="course-create"
     )
 ]
 
