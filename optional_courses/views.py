@@ -2,7 +2,9 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 from django.views import generic
 
 from optional_courses.models import Field, Course, Specialization, \
@@ -49,3 +51,16 @@ class CourseListView(LoginRequiredMixin, generic.ListView):
 
 class CourseDetailView(LoginRequiredMixin, generic.DetailView):
     queryset = Course.objects.prefetch_related("field")
+
+
+@login_required
+def toggle_course_assignment(request, pk):
+    student = get_user_model().objects.get(id=request.user.id)
+    if Course.objects.get(id=pk) in student.courses.all():
+        student.courses.remove(pk)
+    else:
+        student.courses.add(pk)
+
+    return HttpResponseRedirect(
+        reverse("optional_courses:course-detail", args=[pk])
+    )
