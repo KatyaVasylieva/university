@@ -10,7 +10,7 @@
     <ul>
       {% for field in field_list %}
         <li>
-          {{ field.name }} ({{ field.courses.count }} courses)
+          <a href="{{ field.get_absolute_url }}">{{ field.name }}</a> ({{ field.courses.count }} courses)
         </li>
       {% endfor %}
     </ul>
