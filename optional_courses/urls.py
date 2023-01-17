@@ -14,7 +14,7 @@ urlpatterns = [
         name="course-detail"
     ),
     path(
-        "courses/<int:pk>/toggle-course-assignment",
+        "courses/<int:pk>/toggle-course-assignment/",
         toggle_course_assignment,
         name="toggle-course-assignment"
     )
