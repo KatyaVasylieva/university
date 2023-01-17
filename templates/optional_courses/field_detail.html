@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>
+    {{ field.name }}
+  </h1>
+
+  <p>Courses:</p>
+
+  {% if field.courses %}
+    <ul>
+      {% for course in field.courses.all %}
+       <li>{{ course }} ({{ course.students.count }} students are assigned)</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+
+{% endblock %}
