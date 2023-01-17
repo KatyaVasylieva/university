@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>
+    {{ course.title }}
+  </h1>
+
+  <p>
+    Field{{ course.field.all|pluralize }}: {{ field }} {% for field in course.field.all %}{{ field }}{% if not forloop.last %}, {% endif %}{% endfor %}
+  </p>
+
+  <p>
+    Students taking the course:
+    <ul>
+      {% for student in course.students.all %}
+        <li>{{ student }}</li>
+      {% endfor %}
+    </ul>
+  </p>
+
+{% endblock %}
