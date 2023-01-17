@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
 
 
 class Specialization(models.Model):
@@ -18,6 +19,9 @@ class Field(models.Model):
 
     class Meta:
         ordering = ["name"]
+
+    def get_absolute_url(self):
+        return reverse("optional_courses:field-detail", args=[str(self.id)])
 
     def __str__(self):
         return self.name
