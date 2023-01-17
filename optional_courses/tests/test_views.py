@@ -10,7 +10,7 @@ from optional_courses.models import Specialization, Field, Course,\
 class PublicViewsTests(TestCase):
 
     def test_index_login_required(self):
-        index_url = reverse("optional_courses:index")
+        index_url = reverse("optional-courses:index")
         self.client = Client()
         response = self.client.get(index_url)
 
@@ -126,4 +126,51 @@ class PrivateViewsTests(TestCase):
         self.assertEqual(
             response.context["num_visits"],
             1
+        )
+
+    def test_toggle_course_assignment_view(self):
+
+        response = self.client.get(
+            reverse(
+                "optional-courses:course-detail",
+                kwargs={"pk": self.course_ul.pk}
+            )
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Assign me to this course", html=True)
+
+        self.client.get(reverse(
+            "optional-courses:course-detail",
+            kwargs={"pk": self.course_ul.pk}
+        ) + "toggle-course-assignment/")
+
+        response_after_assign = self.client.get(
+            reverse(
+                "optional-courses:course-detail",
+                kwargs={"pk": self.course_ul.pk}
+            )
+        )
+        self.assertTrue(self.user in self.course_ul.students.all())
+        self.assertContains(
+            response_after_assign, "Remove me from this course", html=True
+        )
+
+        self.client.get(
+            reverse(
+                "optional-courses:course-detail",
+                kwargs={"pk": self.course_ul.pk}
+            ) + "toggle-course-assignment/"
+        )
+
+        response_after_remove = self.client.get(
+            reverse(
+                "optional-courses:course-detail",
+                kwargs={"pk": self.course_ul.pk}
+            )
+        )
+        self.assertFalse(self.user in self.course_ul.students.all())
+        self.assertContains(
+            response_after_remove,
+            "Assign me to this course",
+            html=True
         )
