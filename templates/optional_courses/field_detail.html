@@ -11,7 +11,7 @@
   {% if field.courses %}
     <ul>
       {% for course in field.courses.all %}
-       <li>{{ course }} ({{ course.students.count }} students are assigned)</li>
+        <li><a href="{{ course.get_absolute_url }}">{{ course }}</a> ({{ course.students.count }} students are assigned)</li>
       {% endfor %}
     </ul>
   {% endif %}
