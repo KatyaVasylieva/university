@@ -39,7 +39,7 @@ class FieldListView(LoginRequiredMixin, generic.ListView):
 
 
 class FieldDetailView(LoginRequiredMixin, generic.DetailView):
-    model = Field
+    queryset = Field.objects.prefetch_related("courses__students")
 
 
 class CourseListView(LoginRequiredMixin, generic.ListView):
