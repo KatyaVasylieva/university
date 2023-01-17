@@ -9,7 +9,7 @@ from optional_courses.models import Student, UniversityGroup,\
 class StudentAdmin(UserAdmin):
     list_display = UserAdmin.list_display + ("group",)
     fieldsets = UserAdmin.fieldsets + (
-        (("Additional info", {"fields": ("group",)}),)
+        (("Additional info", {"fields": ("group", "courses")}),)
     )
     add_fieldsets = UserAdmin.add_fieldsets + (
         (
@@ -18,6 +18,7 @@ class StudentAdmin(UserAdmin):
                 {
                     "fields": (
                         "group",
+                        "courses"
                     )
                 },
             ),
