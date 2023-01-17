@@ -49,6 +49,9 @@ class Course(models.Model):
     class Meta:
         ordering = ["title"]
 
+    def get_absolute_url(self):
+        return reverse("optional_courses:course-detail", args=[str(self.id)])
+
     def __str__(self):
         return self.title
 
