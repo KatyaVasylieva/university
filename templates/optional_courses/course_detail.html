@@ -6,6 +6,16 @@
     {{ course.title }}
   </h1>
 
+  {% if course in user.courses.all %}
+    <a href="{% url 'optional-courses:toggle-course-assignment' pk=course.id %}" class="btn btn-danger link-to-page">
+      Remove me from this course
+    </a>
+  {% else %}
+    <a href="{% url 'optional-courses:toggle-course-assignment' pk=course.id %}" class="btn btn-success link-to-page">
+      Assign me to this course
+    </a>
+  {% endif %}
+
   <p>
     Field{{ course.field.all|pluralize }}: {{ field }} {% for field in course.field.all %}{{ field }}{% if not forloop.last %}, {% endif %}{% endfor %}
   </p>
