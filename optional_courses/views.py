@@ -4,9 +4,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import generic
 
+from optional_courses.forms import CourseCreateForm
 from optional_courses.models import Field, Course, Specialization, \
     UniversityGroup
 
@@ -51,6 +52,12 @@ class CourseListView(LoginRequiredMixin, generic.ListView):
 
 class CourseDetailView(LoginRequiredMixin, generic.DetailView):
     queryset = Course.objects.prefetch_related("field")
+
+
+class CourseCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Course
+    form_class = CourseCreateForm
+    success_url = reverse_lazy("optional_courses:course-list")
 
 
 @login_required
