@@ -45,3 +45,7 @@ class FieldDetailView(LoginRequiredMixin, generic.DetailView):
 class CourseListView(LoginRequiredMixin, generic.ListView):
     queryset = Course.objects.prefetch_related("field")
     paginate_by = 5
+
+
+class CourseDetailView(LoginRequiredMixin, generic.DetailView):
+    queryset = Course.objects.prefetch_related("field")
