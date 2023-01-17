@@ -39,3 +39,8 @@ class FieldListView(LoginRequiredMixin, generic.ListView):
 
 class FieldDetailView(LoginRequiredMixin, generic.DetailView):
     model = Field
+
+
+class CourseListView(LoginRequiredMixin, generic.ListView):
+    model = Course
+    paginate_by = 5
