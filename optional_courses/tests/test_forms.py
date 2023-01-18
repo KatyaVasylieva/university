@@ -1,23 +1,26 @@
 from django.test import TestCase
 
-from optional_courses.forms import CourseCreateForm
+from optional_courses.forms import CourseCreateForm, CourseUpdateFieldsForm
 from optional_courses.models import Field, Course
 
 
 class FormTests(TestCase):
 
-    def test_course_create_form(self):
-        field_ds = Field.objects.create(
+    @classmethod
+    def setUpTestData(cls):
+        cls.field_ds = Field.objects.create(
             name="Data science"
         )
 
-        field_m = Field.objects.create(
+        cls.field_m = Field.objects.create(
             name="Math and logic"
         )
 
+    def test_course_create_form(self):
+
         form_data = {
             "title": "Unsupervised learning",
-            "fields": [field_ds, field_m],
+            "fields": [self.field_ds, self.field_m],
         }
 
         form = CourseCreateForm(data=form_data)
@@ -28,3 +31,19 @@ class FormTests(TestCase):
             list(form.cleaned_data["fields"]),
             form_data["fields"]
         )
+
+    def test_course_update_fields_form(self):
+        course = Course.objects.create(
+            title="Unsupervised learning",
+        )
+        course.fields.set([self.field_ds])
+
+        form_data = {
+            "fields": [self.field_ds, self.field_m]
+        }
+
+        form = CourseUpdateFieldsForm(data=form_data)
+
+        self.assertTrue(form.is_valid())
+        case = form.save()
+        self.assertEqual(form_data["fields"], list(case.fields.all()))
