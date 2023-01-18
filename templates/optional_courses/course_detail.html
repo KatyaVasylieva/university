@@ -4,6 +4,10 @@
 
   <h1>
     {{ course.title }}
+
+    <a href="{% url 'optional-courses:course-update' pk=course.id %}" class="btn btn-secondary link-to-page">
+      Update
+    </a>
   </h1>
 
   {% if course in user.courses.all %}
