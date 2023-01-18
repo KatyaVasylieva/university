@@ -7,7 +7,8 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views import generic
 
-from optional_courses.forms import CourseCreateForm, CourseUpdateFieldsForm, CourseTitleSearchForm
+from optional_courses.forms import CourseCreateForm, CourseUpdateFieldsForm, \
+    CourseTitleSearchForm
 from optional_courses.models import Field, Course, Specialization, \
     UniversityGroup
 
@@ -46,7 +47,6 @@ class FieldDetailView(LoginRequiredMixin, generic.DetailView):
 
 
 class CourseListView(LoginRequiredMixin, generic.ListView):
-    queryset = Course.objects.prefetch_related("fields")
     paginate_by = 5
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -60,7 +60,7 @@ class CourseListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        queryset = Course.objects.all()
+        queryset = Course.objects.prefetch_related("fields")
 
         title = self.request.GET.get("title")
 
