@@ -9,6 +9,7 @@ from optional_courses.views import (
     toggle_course_assignment,
     CourseCreateView,
     CourseFieldsUpdateView,
+    SpecializationListView,
 )
 
 urlpatterns = [
@@ -35,6 +36,11 @@ urlpatterns = [
         "courses/<int:pk>/update/",
         CourseFieldsUpdateView.as_view(),
         name="course-update"
+    ),
+    path(
+        "specializations/",
+        SpecializationListView.as_view(),
+        name="specialization-list"
     )
 ]
 
