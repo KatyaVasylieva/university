@@ -174,3 +174,19 @@ class PrivateViewsTests(TestCase):
             "Assign me to this course",
             html=True
         )
+
+    def test_course_list_view_search_by_title(self):
+        form_data = {
+            "title": "m"
+        }
+        response = self.client.get(
+            reverse("optional-courses:course-list") + f"?title={form_data['title']}"
+        )
+        expected_queryset = Course.objects.filter(
+            title__icontains=form_data["title"]
+        )
+
+        self.assertQuerysetEqual(
+            list(response.context["course_list"]),
+            list(expected_queryset)
+        )
