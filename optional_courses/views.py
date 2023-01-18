@@ -102,6 +102,10 @@ class StudentListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
 
 
+class StudentDetailView(LoginRequiredMixin, generic.DetailView):
+    model = get_user_model()
+
+
 @login_required
 def toggle_course_assignment(request, pk):
     student = get_user_model().objects.get(id=request.user.id)
