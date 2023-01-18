@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from optional_courses.forms import CourseCreateForm, CourseUpdateFieldsForm, StudentCreationForm
+from optional_courses.forms import CourseCreateForm, CourseUpdateFieldsForm, StudentCreationForm, StudentUpdateForm
 from optional_courses.models import Field, Course, Specialization, UniversityGroup
 
 
@@ -131,3 +131,22 @@ class FormTests(TestCase):
         form = StudentCreationForm(data=form_data)
 
         self.assertFalse(form.is_valid())
+
+    def test_student_update_form(self):
+
+        group_ie2 = UniversityGroup.objects.create(
+            short_name="IE-402",
+            specialization=self.specialization_ec
+        )
+
+        form_data = {
+            "first_name": self.student_dk.first_name,
+            "last_name": self.student_dk.last_name,
+            "group": group_ie2,
+        }
+
+        form = StudentUpdateForm(data=form_data, instance=self.student_dk)
+
+        self.assertTrue(form.is_valid())
+        form.save()
+        self.assertEqual(form_data["group"], self.student_dk.group)
