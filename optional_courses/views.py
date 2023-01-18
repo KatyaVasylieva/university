@@ -92,6 +92,11 @@ class SpecializationDetailView(LoginRequiredMixin, generic.DetailView):
     model = Specialization
 
 
+class UniversityGroupDetailView(LoginRequiredMixin, generic.DetailView):
+    model = UniversityGroup
+    template_name = "optional_courses/group_detail.html"
+
+
 @login_required
 def toggle_course_assignment(request, pk):
     student = get_user_model().objects.get(id=request.user.id)
