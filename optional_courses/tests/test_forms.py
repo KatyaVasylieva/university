@@ -83,11 +83,11 @@ class FormTests(TestCase):
             "fields": [self.field_ds, self.field_m]
         }
 
-        form = CourseUpdateFieldsForm(data=form_data)
+        form = CourseUpdateFieldsForm(data=form_data, instance=self.course_ul)
 
         self.assertTrue(form.is_valid())
-        case = form.save()
-        self.assertEqual(form_data["fields"], list(case.fields.all()))
+        form.save()
+        self.assertEqual(form_data["fields"], list(self.course_ul.fields.all()))
 
     def test_course_update_form_with_more_than_3_fields(self):
 
@@ -97,7 +97,7 @@ class FormTests(TestCase):
             ]
         }
 
-        form = CourseUpdateFieldsForm(data=form_data)
+        form = CourseUpdateFieldsForm(data=form_data, instance=self.course_ul)
 
         self.assertFalse(form.is_valid())
 
