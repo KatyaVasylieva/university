@@ -88,6 +88,10 @@ class SpecializationListView(LoginRequiredMixin, generic.ListView):
     queryset = Specialization.objects.annotate(num_groups=Count("groups"))
 
 
+class SpecializationDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Specialization
+
+
 @login_required
 def toggle_course_assignment(request, pk):
     student = get_user_model().objects.get(id=request.user.id)
