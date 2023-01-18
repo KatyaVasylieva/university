@@ -78,5 +78,8 @@ class Student(AbstractUser):
     class Meta:
         ordering = ["last_name"]
 
+    def get_absolute_url(self):
+        return reverse("optional-courses:student-detail", args=[str(self.id)])
+
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.username})"
