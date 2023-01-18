@@ -10,6 +10,9 @@ class Specialization(models.Model):
     class Meta:
         ordering = ["name"]
 
+    def get_absolute_url(self):
+        return reverse("optional-courses:specialization-detail", args=[str(self.id)])
+
     def __str__(self):
         return self.name
 
@@ -21,7 +24,7 @@ class Field(models.Model):
         ordering = ["name"]
 
     def get_absolute_url(self):
-        return reverse("optional_courses:field-detail", args=[str(self.id)])
+        return reverse("optional-courses:field-detail", args=[str(self.id)])
 
     def __str__(self):
         return self.name
@@ -50,7 +53,7 @@ class Course(models.Model):
         ordering = ["title"]
 
     def get_absolute_url(self):
-        return reverse("optional_courses:course-detail", args=[str(self.id)])
+        return reverse("optional-courses:course-detail", args=[str(self.id)])
 
     def __str__(self):
         return self.title
