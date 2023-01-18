@@ -48,6 +48,14 @@ class FormTests(TestCase):
         )
         self.student_dk.courses.set([self.course_ul])
 
+        self.student_kv = get_user_model().objects.create(
+            username="katerynavasylieva",
+            first_name="Kateryna",
+            last_name="Vasylieva",
+            group=self.group_ie1,
+            password="hellogorgeous"
+        )
+
     def test_course_create_form(self):
 
         form_data = {
@@ -150,3 +158,15 @@ class FormTests(TestCase):
         self.assertTrue(form.is_valid())
         form.save()
         self.assertEqual(form_data["group"], self.student_dk.group)
+
+    def test_student_update_form_existing_full_name(self):
+
+        form_data = {
+            "first_name": "Kateryna",
+            "last_name": "Vasylieva",
+            "group": self.student_dk.group,
+        }
+
+        form = CourseUpdateFieldsForm(data=form_data, instance=self.course_ul)
+
+        self.assertFalse(form.is_valid())
