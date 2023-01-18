@@ -9,7 +9,7 @@
     <ul>
       {% for spec in specialization_list %}
         <li>
-          <a href="">{{ spec.name }}</a> ({{ spec.num_groups }} group{{ spec.num_groups|pluralize }})
+          <a href="{{ spec.get_absolute_url }}">{{ spec.name }}</a> ({{ spec.num_groups }} group{{ spec.num_groups|pluralize }})
         </li>
       {% endfor %}
     </ul>
