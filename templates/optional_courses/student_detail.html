@@ -14,7 +14,7 @@
     {% endif %}
   </p>
 
-  {% if student.courses %}
+  {% if student.courses.all %}
     {{ student.first_name }} is taking the following courses:
     <ul>
       {% for course in student.courses.all %}
