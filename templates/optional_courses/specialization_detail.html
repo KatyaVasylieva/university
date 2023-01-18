@@ -14,7 +14,7 @@
     Groups which students are taking optional courses:
     <ul>
       {% for group in specialization.groups.all %}
-        <li>{{ group }}</li>
+        <li><a href="{{ group.get_absolute_url }}">{{ group }}</a></li>
       {% endfor %}
     </ul>
   </p>
