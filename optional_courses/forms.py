@@ -14,6 +14,9 @@ class CourseCreateForm(forms.ModelForm):
         model = Course
         fields = "__all__"
 
+    def clean_fields(self):
+        return validate_course_fields(self.cleaned_data["fields"])
+
 
 class CourseUpdateFieldsForm(forms.ModelForm):
     fields = forms.ModelMultipleChoiceField(
@@ -24,6 +27,9 @@ class CourseUpdateFieldsForm(forms.ModelForm):
     class Meta:
         model = Course
         fields = ["fields"]
+
+    def clean_fields(self):
+        return validate_course_fields(self.cleaned_data["fields"])
 
 
 def validate_course_fields(fields):
