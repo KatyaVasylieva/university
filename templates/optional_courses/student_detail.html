@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>
+    {{ student.first_name }} {{ student.last_name }}
+  </h1>
+
+  <p>
+    <strong>Username:</strong> {{ student.username }}<br>
+
+    {% if student.group %}
+    <strong>Group:</strong> {{ student.group }}
+    {% endif %}
+  </p>
+
+  {% if student.courses %}
+    {{ student.first_name }} is taking the following courses:
+    <ul>
+      {% for course in student.courses.all %}
+        <li><a href="{{ course.get_absolute_url }}">{{ course }}</a></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+{% endblock %}
