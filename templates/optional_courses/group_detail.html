@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>
+    {{ universitygroup.short_name }}
+  </h1>
+
+  <p>
+    Students of the group taking optional courses:
+    <ul>
+    {% for student in universitygroup.students.all %}
+      <li>{{ student }}</li>
+    {% endfor %}
+    </ul>
+  </p>
+
+{% endblock %}
