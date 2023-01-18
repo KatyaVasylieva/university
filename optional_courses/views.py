@@ -84,6 +84,10 @@ class CourseFieldsUpdateView(LoginRequiredMixin, generic.UpdateView):
     form_class = CourseUpdateFieldsForm
 
 
+class SpecializationListView(LoginRequiredMixin, generic.ListView):
+    queryset = Specialization.objects.prefetch_related("groups").annotate(num_groups=Count("groups"))
+
+
 @login_required
 def toggle_course_assignment(request, pk):
     student = get_user_model().objects.get(id=request.user.id)
