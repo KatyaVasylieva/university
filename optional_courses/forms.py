@@ -32,6 +32,16 @@ class CourseUpdateFieldsForm(forms.ModelForm):
         return validate_course_fields(self.cleaned_data["fields"])
 
 
+class CourseTitleSearchForm(forms.Form):
+    title = forms.CharField(
+        max_length=255,
+        required=False,
+        widget=forms.TextInput(
+            attrs={"placeholder": "Start typing the course title here"}
+        )
+    )
+
+
 def validate_course_fields(fields):
     if len(fields) > 3:
         raise ValidationError("Ensure to include no more than 3 fields")
