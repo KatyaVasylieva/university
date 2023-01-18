@@ -25,12 +25,16 @@
   </p>
 
   <p>
-    Students taking the course:
-    <ul>
-      {% for student in course.students.all %}
-        <li>{{ student }}</li>
-      {% endfor %}
-    </ul>
+    {% if course.students.all %}
+      Students taking the course:
+      <ul>
+        {% for student in course.students.all %}
+          <li>{{ student }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      Be the first to start taking the course!
+    {% endif %}
   </p>
 
 {% endblock %}
