@@ -9,7 +9,7 @@
     <ul>
       {% for student in student_list %}
         <li>
-          {{ student }}
+          <a href="{{ student.get_absolute_url }}">{{ student }}</a>
         </li>
       {% endfor %}
     </ul>
