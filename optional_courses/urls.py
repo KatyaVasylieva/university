@@ -13,6 +13,7 @@ from optional_courses.views import (
     SpecializationDetailView,
     UniversityGroupDetailView,
     StudentListView,
+    StudentDetailView,
 )
 
 urlpatterns = [
@@ -59,6 +60,11 @@ urlpatterns = [
         "students/",
         StudentListView.as_view(),
         name="student-list"
+    ),
+    path(
+        "students/<int:pk>/",
+        StudentDetailView.as_view(),
+        name="student-detail"
     )
 ]
 
