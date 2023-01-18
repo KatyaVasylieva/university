@@ -55,6 +55,13 @@ class StudentCreationForm(UserCreationForm):
         )
 
 
+class StudentUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = get_user_model()
+        fields = ["first_name", "last_name", "group"]
+
+
 def validate_course_fields(fields):
     if len(fields) > 3:
         raise ValidationError("Ensure to include no more than 3 fields")
