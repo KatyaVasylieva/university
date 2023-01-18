@@ -8,7 +8,7 @@ from django.urls import reverse
 from django.views import generic
 
 from optional_courses.forms import CourseCreateForm, CourseUpdateFieldsForm, \
-    CourseTitleSearchForm, StudentCreationForm
+    CourseTitleSearchForm, StudentCreationForm, StudentUpdateForm
 from optional_courses.models import Field, Course, Specialization, \
     UniversityGroup
 
@@ -109,6 +109,11 @@ class StudentDetailView(LoginRequiredMixin, generic.DetailView):
 class StudentCreateView(LoginRequiredMixin, generic.CreateView):
     model = get_user_model()
     form_class = StudentCreationForm
+
+
+class StudentUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = get_user_model()
+    form_class = StudentUpdateForm
 
 
 @login_required
