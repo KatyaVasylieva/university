@@ -9,6 +9,11 @@
     </a>
   </h1>
 
+  <form action="" method="get">
+    {{ search_form|crispy }}
+    <input type="submit" value="Search" class="btn btn-light">
+  </form>
+
   {% if course_list %}
     <ul>
       {% for course in course_list %}
