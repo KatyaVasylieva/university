@@ -41,6 +41,9 @@ class UniversityGroup(models.Model):
     class Meta:
         ordering = ["short_name"]
 
+    def get_absolute_url(self):
+        return reverse("optional-courses:group-detail", args=[str(self.id)])
+
     def __str__(self):
         return self.short_name
 
