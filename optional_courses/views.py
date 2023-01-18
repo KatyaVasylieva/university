@@ -97,6 +97,11 @@ class UniversityGroupDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = "optional_courses/group_detail.html"
 
 
+class StudentListView(LoginRequiredMixin, generic.ListView):
+    model = get_user_model()
+    paginate_by = 5
+
+
 @login_required
 def toggle_course_assignment(request, pk):
     student = get_user_model().objects.get(id=request.user.id)
