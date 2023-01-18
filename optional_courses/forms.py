@@ -1,7 +1,9 @@
 from django import forms
+from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
-from optional_courses.models import Field, Course
+from optional_courses.models import Field, Course, UniversityGroup
 
 
 class CourseCreateForm(forms.ModelForm):
@@ -40,6 +42,17 @@ class CourseTitleSearchForm(forms.Form):
             attrs={"placeholder": "Start typing the course title here"}
         )
     )
+
+
+class StudentCreationForm(UserCreationForm):
+
+    class Meta(UserCreationForm.Meta):
+        model = get_user_model()
+        fields = UserCreationForm.Meta.fields + (
+            "first_name",
+            "last_name",
+            "group",
+        )
 
 
 def validate_course_fields(fields):
