@@ -71,7 +71,7 @@ class CourseListView(LoginRequiredMixin, generic.ListView):
 
 
 class CourseDetailView(LoginRequiredMixin, generic.DetailView):
-    queryset = Course.objects.prefetch_related("fields")
+    queryset = Course.objects.prefetch_related("fields", "students")
 
 
 class CourseCreateView(LoginRequiredMixin, generic.CreateView):
