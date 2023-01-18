@@ -85,7 +85,7 @@ class CourseFieldsUpdateView(LoginRequiredMixin, generic.UpdateView):
 
 
 class SpecializationListView(LoginRequiredMixin, generic.ListView):
-    queryset = Specialization.objects.annotate(num_groups=Count("groups"))
+    queryset = Specialization.objects.prefetch_related("groups")
 
 
 class SpecializationDetailView(LoginRequiredMixin, generic.DetailView):
