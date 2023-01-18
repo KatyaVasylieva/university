@@ -13,7 +13,7 @@ from optional_courses.views import (
     SpecializationDetailView,
     UniversityGroupDetailView,
     StudentListView,
-    StudentDetailView, StudentCreateView,
+    StudentDetailView, StudentCreateView, StudentUpdateView,
 )
 
 urlpatterns = [
@@ -32,9 +32,7 @@ urlpatterns = [
         name="toggle-course-assignment"
     ),
     path(
-        "courses/create/",
-        CourseCreateView.as_view(),
-        name="course-create"
+        "courses/create/", CourseCreateView.as_view(), name="course-create"
     ),
     path(
         "courses/<int:pk>/update/",
@@ -56,11 +54,7 @@ urlpatterns = [
         UniversityGroupDetailView.as_view(),
         name="group-detail"
     ),
-    path(
-        "students/",
-        StudentListView.as_view(),
-        name="student-list"
-    ),
+    path("students/", StudentListView.as_view(), name="student-list"),
     path(
         "students/<int:pk>/",
         StudentDetailView.as_view(),
@@ -70,6 +64,11 @@ urlpatterns = [
         "students/create/",
         StudentCreateView.as_view(),
         name="student-create"
+    ),
+    path(
+        "students/<int:pk>/update/",
+        StudentUpdateView.as_view(),
+        name="student-update"
     )
 ]
 
