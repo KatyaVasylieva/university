@@ -16,6 +16,14 @@ class FormTests(TestCase):
             name="Math and logic"
         )
 
+        cls.field_cs = Field.objects.create(
+            name="Computer sciense"
+        )
+
+        cls.field_e = Field.objects.create(
+            name="Engineering"
+        )
+
     def test_course_create_form(self):
 
         form_data = {
@@ -31,6 +39,19 @@ class FormTests(TestCase):
             list(form.cleaned_data["fields"]),
             form_data["fields"]
         )
+
+    def test_course_create_form_with_more_than_3_fields(self):
+
+        form_data = {
+            "title": "Unsupervised learning",
+            "fields": [
+                self.field_ds, self.field_m, self.field_cs, self.field_e
+            ],
+        }
+
+        form = CourseCreateForm(data=form_data)
+
+        self.assertFalse(form.is_valid())
 
     def test_course_update_fields_form(self):
         course = Course.objects.create(
