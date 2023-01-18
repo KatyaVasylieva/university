@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.db.models import UniqueConstraint
 from django.urls import reverse
 
 
@@ -11,7 +12,10 @@ class Specialization(models.Model):
         ordering = ["name"]
 
     def get_absolute_url(self):
-        return reverse("optional-courses:specialization-detail", args=[str(self.id)])
+        return reverse(
+            "optional-courses:specialization-detail",
+            args=[str(self.id)]
+        )
 
     def __str__(self):
         return self.name
@@ -77,6 +81,12 @@ class Student(AbstractUser):
 
     class Meta:
         ordering = ["last_name"]
+        constraints = [
+            UniqueConstraint(
+                fields=["first_name", "last_name"],
+                name="unique_full_name"
+            )
+        ]
 
     def get_absolute_url(self):
         return reverse("optional-courses:student-detail", args=[str(self.id)])
