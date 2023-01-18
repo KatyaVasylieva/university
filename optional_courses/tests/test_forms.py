@@ -68,3 +68,20 @@ class FormTests(TestCase):
         self.assertTrue(form.is_valid())
         case = form.save()
         self.assertEqual(form_data["fields"], list(case.fields.all()))
+
+    def test_course_update_form_with_more_than_3_fields(self):
+
+        course = Course.objects.create(
+            title="Unsupervised learning",
+        )
+        course.fields.set([self.field_ds])
+
+        form_data = {
+            "fields": [
+                self.field_ds, self.field_m, self.field_cs, self.field_e
+            ]
+        }
+
+        form = CourseUpdateFieldsForm(data=form_data)
+
+        self.assertFalse(form.is_valid())
