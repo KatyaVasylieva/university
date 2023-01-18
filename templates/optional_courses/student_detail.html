@@ -4,6 +4,10 @@
 
   <h1>
     {{ student.first_name }} {{ student.last_name }}
+
+    <a href="{% url 'optional-courses:student-update' pk=student.id %}" class="btn btn-secondary link-to-page">
+      Update
+    </a>
   </h1>
 
   <p>
