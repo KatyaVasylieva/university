@@ -1,7 +1,7 @@
 from django.test import TestCase
 
-from optional_courses.forms import CourseCreateForm, CourseUpdateFieldsForm
-from optional_courses.models import Field, Course
+from optional_courses.forms import CourseCreateForm, CourseUpdateFieldsForm, StudentCreationForm
+from optional_courses.models import Field, Course, Specialization, UniversityGroup
 
 
 class FormTests(TestCase):
@@ -22,6 +22,11 @@ class FormTests(TestCase):
 
         cls.field_e = Field.objects.create(
             name="Engineering"
+        )
+
+        cls.specialization_ec = Specialization.objects.create(
+            name="Economic cybernetics",
+            description="Economic systems, mathematical modeling"
         )
 
     def test_course_create_form(self):
@@ -85,3 +90,24 @@ class FormTests(TestCase):
         form = CourseUpdateFieldsForm(data=form_data)
 
         self.assertFalse(form.is_valid())
+
+    def test_student_create_form(self):
+
+        group_ie1 = UniversityGroup.objects.create(
+            short_name="IE-401",
+            specialization=self.specialization_ec
+        )
+
+        form_data = {
+            "username": "mariasamkova",
+            "first_name": "Maria",
+            "last_name": "Samkova",
+            "group": group_ie1,
+            "password1": "hellobeautiful",
+            "password2": "hellobeautiful",
+        }
+
+        form = StudentCreationForm(data=form_data)
+
+        self.assertTrue(form.is_valid())
+        self.assertEqual(form.cleaned_data, form_data)
