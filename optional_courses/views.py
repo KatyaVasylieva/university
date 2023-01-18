@@ -57,7 +57,6 @@ class CourseDetailView(LoginRequiredMixin, generic.DetailView):
 class CourseCreateView(LoginRequiredMixin, generic.CreateView):
     model = Course
     form_class = CourseCreateForm
-    success_url = reverse_lazy("optional_courses:course-list")
 
 
 @login_required
