@@ -4,10 +4,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 from django.views import generic
 
-from optional_courses.forms import CourseCreateForm
+from optional_courses.forms import CourseCreateForm, CourseUpdateFieldsForm
 from optional_courses.models import Field, Course, Specialization, \
     UniversityGroup
 
@@ -57,6 +57,11 @@ class CourseDetailView(LoginRequiredMixin, generic.DetailView):
 class CourseCreateView(LoginRequiredMixin, generic.CreateView):
     model = Course
     form_class = CourseCreateForm
+
+
+class CourseFieldsUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Course
+    form_class = CourseUpdateFieldsForm
 
 
 @login_required
