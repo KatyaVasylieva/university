@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>
+    {{ specialization.name }}
+  </h1>
+
+  <p>
+  {{ specialization.description }}
+  </p>
+
+  <p>
+    Groups which students are taking optional courses:
+    <ul>
+      {% for group in specialization.groups.all %}
+        <li>{{ group }}</li>
+      {% endfor %}
+    </ul>
+  </p>
+
+{% endblock %}
