@@ -44,7 +44,7 @@ class UniversityGroup(models.Model):
 
 class Course(models.Model):
     title = models.CharField(max_length=255, unique=True)
-    field = models.ManyToManyField(Field, related_name="courses")
+    fields = models.ManyToManyField(Field, related_name="courses")
 
     class Meta:
         ordering = ["title"]

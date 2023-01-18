@@ -52,12 +52,12 @@ class PrivateViewsTests(TestCase):
         self.course_ul = Course.objects.create(
             title="Unsupervised learning"
         )
-        self.course_ul.field.set([self.field_ds])
+        self.course_ul.fields.set([self.field_ds])
 
         self.course_cg = Course.objects.create(
             title="Combinatorial game theory"
         )
-        self.course_cg.field.set([self.field_m])
+        self.course_cg.fields.set([self.field_m])
 
         self.student_ms = get_user_model().objects.create(
             username="mariasamkova",

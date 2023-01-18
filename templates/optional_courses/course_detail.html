@@ -17,7 +17,7 @@
   {% endif %}
 
   <p>
-    Field{{ course.field.all|pluralize }}: {{ field }} {% for field in course.field.all %}{{ field }}{% if not forloop.last %}, {% endif %}{% endfor %}
+    Field{{ course.fields.all|pluralize }}: {{ field }} {% for field in course.fields.all %}{{ field }}{% if not forloop.last %}, {% endif %}{% endfor %}
   </p>
 
   <p>

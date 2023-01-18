@@ -34,7 +34,7 @@ class StudentGroupAdmin(admin.ModelAdmin):
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     search_fields = ("title",)
-    list_filter = ("field",)
+    list_filter = ("fields",)
 
 
 admin.site.register(Specialization)
