@@ -8,6 +8,7 @@ from optional_courses.views import (
     CourseDetailView,
     toggle_course_assignment,
     CourseCreateView,
+    CourseFieldsUpdateView,
 )
 
 urlpatterns = [
@@ -29,6 +30,11 @@ urlpatterns = [
         "courses/create/",
         CourseCreateView.as_view(),
         name="course-create"
+    ),
+    path(
+        "courses/<int:pk>/update/",
+        CourseFieldsUpdateView.as_view(),
+        name="course-update"
     )
 ]
 
