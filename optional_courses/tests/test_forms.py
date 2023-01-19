@@ -1,8 +1,10 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from optional_courses.forms import CourseCreateForm, CourseUpdateFieldsForm, StudentCreationForm, StudentUpdateForm
-from optional_courses.models import Field, Course, Specialization, UniversityGroup
+from optional_courses.forms import CourseCreateForm, \
+    CourseUpdateFieldsForm, StudentCreationForm, StudentUpdateForm
+from optional_courses.models import Field, Course, Specialization, \
+    UniversityGroup
 
 
 class FormTests(TestCase):
@@ -95,7 +97,10 @@ class FormTests(TestCase):
 
         self.assertTrue(form.is_valid())
         form.save()
-        self.assertEqual(form_data["fields"], list(self.course_ul.fields.all()))
+        self.assertEqual(
+            form_data["fields"],
+            list(self.course_ul.fields.all())
+        )
 
     def test_course_update_form_with_more_than_3_fields(self):
 
@@ -124,6 +129,23 @@ class FormTests(TestCase):
 
         self.assertTrue(form.is_valid())
         self.assertEqual(form.cleaned_data, form_data)
+
+    def test_student_creation_form_lowercase_names(self):
+
+        form_data = {
+            "username": "mariasamkova",
+            "first_name": "maria",
+            "last_name": "samkova",
+            "group": self.group_ie1,
+            "password1": "hellobeautiful",
+            "password2": "hellobeautiful",
+        }
+
+        form = StudentCreationForm(data=form_data)
+
+        self.assertTrue(form.is_valid())
+        self.assertEqual(form.cleaned_data["first_name"], "Maria")
+        self.assertEqual(form.cleaned_data["last_name"], "Samkova")
 
     def test_student_create_form_with_existing_full_name(self):
 
