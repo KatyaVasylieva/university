@@ -66,3 +66,8 @@ def validate_course_fields(fields):
     if len(fields) > 3:
         raise ValidationError("Ensure to include no more than 3 fields")
     return fields
+
+
+def case_insensitivity_for_student_names(name):
+    name_clean = name[0].upper() + name[1:]
+    return name_clean
