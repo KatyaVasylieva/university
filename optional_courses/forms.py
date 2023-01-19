@@ -82,6 +82,16 @@ class StudentUpdateForm(forms.ModelForm):
         )
 
 
+class StudentUsernameSearchForm(forms.Form):
+    username = forms.CharField(
+        max_length=255,
+        required=False,
+        widget=forms.TextInput(
+            attrs={"placeholder": "Start typing the student username here"}
+        )
+    )
+
+
 def validate_course_fields(fields):
     if len(fields) > 3:
         raise ValidationError("Ensure to include no more than 3 fields")
