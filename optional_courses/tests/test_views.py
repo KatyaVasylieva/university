@@ -180,7 +180,8 @@ class PrivateViewsTests(TestCase):
             "title": "m"
         }
         response = self.client.get(
-            reverse("optional-courses:course-list") + f"?title={form_data['title']}"
+            reverse("optional-courses:course-list")
+            + f"?title={form_data['title']}"
         )
         expected_queryset = Course.objects.filter(
             title__icontains=form_data["title"]
@@ -188,5 +189,22 @@ class PrivateViewsTests(TestCase):
 
         self.assertQuerysetEqual(
             list(response.context["course_list"]),
+            list(expected_queryset)
+        )
+
+    def test_student_list_view_search_by_username(self):
+        form_data = {
+            "username": "ka"
+        }
+        response = self.client.get(
+            reverse("optional-courses:student-list")
+            + f"?username={form_data['username']}"
+        )
+        expected_queryset = get_user_model().objects.filter(
+            username__icontains=form_data["username"]
+        )
+
+        self.assertQuerysetEqual(
+            list(response.context["student_list"]),
             list(expected_queryset)
         )
