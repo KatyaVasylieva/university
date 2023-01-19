@@ -54,12 +54,32 @@ class StudentCreationForm(UserCreationForm):
             "group",
         )
 
+    def clean_first_name(self):
+        return case_insensitivity_for_student_names(
+            self.cleaned_data["first_name"]
+        )
+
+    def clean_last_name(self):
+        return case_insensitivity_for_student_names(
+            self.cleaned_data["last_name"]
+        )
+
 
 class StudentUpdateForm(forms.ModelForm):
 
     class Meta:
         model = get_user_model()
         fields = ["first_name", "last_name", "group"]
+
+    def clean_first_name(self):
+        return case_insensitivity_for_student_names(
+            self.cleaned_data["first_name"]
+        )
+
+    def clean_last_name(self):
+        return case_insensitivity_for_student_names(
+            self.cleaned_data["last_name"]
+        )
 
 
 def validate_course_fields(fields):
