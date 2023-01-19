@@ -7,8 +7,14 @@ from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 
-from optional_courses.forms import CourseCreateForm, CourseUpdateFieldsForm, \
-    CourseTitleSearchForm, StudentCreationForm, StudentUpdateForm
+from optional_courses.forms import (
+    CourseCreateForm,
+    CourseUpdateFieldsForm,
+    CourseTitleSearchForm,
+    StudentCreationForm,
+    StudentUpdateForm,
+    StudentUsernameSearchForm
+)
 from optional_courses.models import Field, Course, Specialization, \
     UniversityGroup
 
@@ -98,8 +104,27 @@ class UniversityGroupDetailView(LoginRequiredMixin, generic.DetailView):
 
 
 class StudentListView(LoginRequiredMixin, generic.ListView):
-    model = get_user_model()
     paginate_by = 5
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(StudentListView, self).get_context_data(**kwargs)
+        username = self.request.GET.get("username", "")
+
+        context["search_form"] = StudentUsernameSearchForm(
+            initial={"username": username}
+        )
+
+        return context
+
+    def get_queryset(self):
+        queryset = get_user_model().objects.all()
+
+        username = self.request.GET.get("username")
+
+        if username:
+            return queryset.filter(username__icontains=username)
+
+        return queryset
 
 
 class StudentDetailView(LoginRequiredMixin, generic.DetailView):
