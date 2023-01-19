@@ -192,3 +192,18 @@ class FormTests(TestCase):
         form = CourseUpdateFieldsForm(data=form_data, instance=self.course_ul)
 
         self.assertFalse(form.is_valid())
+
+    def test_student_update_form_lowercase_names(self):
+
+        form_data = {
+            "first_name": "ariana",
+            "last_name": "zavalska",
+            "group": self.student_dk.group,
+        }
+
+        form = StudentUpdateForm(data=form_data, instance=self.student_dk)
+
+        self.assertTrue(form.is_valid())
+        form.save()
+        self.assertEqual(self.student_dk.first_name, "Ariana")
+        self.assertEqual(self.student_dk.last_name, "Zavalska")
