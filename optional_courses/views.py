@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import generic
 
 from optional_courses.forms import CourseCreateForm, CourseUpdateFieldsForm, \
@@ -114,6 +114,11 @@ class StudentCreateView(LoginRequiredMixin, generic.CreateView):
 class StudentUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = get_user_model()
     form_class = StudentUpdateForm
+
+
+class StudentDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = get_user_model()
+    success_url = reverse_lazy("optional-courses:student-list")
 
 
 @login_required
