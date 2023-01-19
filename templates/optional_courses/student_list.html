@@ -9,13 +9,18 @@
     </a>
   </h1>
 
-    <ul>
-      {% for student in student_list %}
-        <li>
-          <a href="{{ student.get_absolute_url }}">{{ student }}</a>
-        </li>
-      {% endfor %}
-    </ul>
+  <form action="" method="get">
+    {{ search_form|crispy }}
+    <input type="submit" value="Search" class="btn btn-light">
+  </form>
+
+  <ul>
+    {% for student in student_list %}
+      <li>
+        <a href="{{ student.get_absolute_url }}">{{ student }}</a>
+      </li>
+    {% endfor %}
+  </ul>
 
 
 {% endblock %}
