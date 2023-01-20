@@ -128,7 +128,7 @@ class StudentListView(LoginRequiredMixin, generic.ListView):
 
 
 class StudentDetailView(LoginRequiredMixin, generic.DetailView):
-    model = get_user_model()
+    queryset = get_user_model().objects.prefetch_related("courses")
 
 
 class StudentCreateView(LoginRequiredMixin, generic.CreateView):
