@@ -1,17 +1,451 @@
-{% extends "base.html" %}
+<!--
+=========================================================
+* Material Kit 2 - v3.0.4
+=========================================================
 
-{% block content %}
-  <h1>Optional Courses - Home page</h1>
+* Product Page:  https://www.creative-tim.com/product/material-kit
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+* Coded by www.creative-tim.com
 
-  <p>The university optional courses have the following record counts:</p>
-  <ul>
-    <li><strong>{{ num_students }}</strong> students are currently taking optional courses</li>
-    <li>Generally, {{ num_courses }} courses are available, all of them from <strong>{{ num_fields }}</strong> different fields of study</li>
-    <li>Student who are taking optional courses came from <strong>{{ num_university_groups }}</strong> groups of <strong>{{ num_specializations }}</strong> specializations</li>
-  </ul>
+ =========================================================
 
-  <p>You have visited this page
-    {{ num_visits }} time{{ num_visits|pluralize }}.
-  </p>
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
 
-{% endblock %}
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/static/img/harvard.png">
+  <link rel="icon" type="image/png" href="/static/img/harvard.png">
+
+  <title>
+    University | Optional courses
+  </title>
+
+
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+
+  <!-- Nucleo Icons -->
+  <link href="/static/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="/static/css/nucleo-svg.css" rel="stylesheet" />
+
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+  <!-- CSS Files -->
+  <link id="pagestyle" href="/static/css/material-kit.css?v=3.0.4" rel="stylesheet" />
+</head>
+
+<body class="index-page bg-gray-200">
+
+
+  <!-- Navbar -->
+<div class="container position-sticky z-index-sticky top-0"><div class="row"><div class="col-12">
+  <nav class="navbar navbar-expand-lg  blur border-radius-xl top-0 z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
+    <div class="container-fluid px-0">
+
+      <div class="navbar-brand font-weight-bolder ms-sm-3" rel="tooltip" title="Designed and Coded by Creative Tim" data-placement="bottom">
+        Optional courses
+      </div>
+      <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon mt-2">
+          <span class="navbar-toggler-bar bar1"></span>
+          <span class="navbar-toggler-bar bar2"></span>
+          <span class="navbar-toggler-bar bar3"></span>
+        </span>
+      </button>
+      <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
+        <ul class="navbar-nav navbar-nav-hover ms-auto">
+
+          <li class="nav-item dropdown dropdown-hover mx-2">
+            <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
+              Fields of study
+              <img src="/static/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
+            </a>
+            <div class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages">
+              <ul class="d-none d-lg-block">
+                <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
+                  <a href="{% url 'optional-courses:field-list' %}">
+                    All fields
+                  </a>
+                </h6>
+                <a href="{% url 'optional-courses:field-detail' pk=1 %}" class="dropdown-item border-radius-md">
+                  <span>Data science</span>
+                </a>
+                <a href="{% url 'optional-courses:field-detail' pk=2 %}" class="dropdown-item border-radius-md">
+                  <span>Computer science</span>
+                </a>
+                <a href="{% url 'optional-courses:field-detail' pk=4 %}" class="dropdown-item border-radius-md">
+                  <span>Math and logic</span>
+                </a>
+                <a href="{% url 'optional-courses:field-detail' pk=5 %}" class="dropdown-item border-radius-md">
+                  <span>Physical science and engineering</span>
+                </a>
+                <a href="{% url 'optional-courses:field-detail' pk=3 %}" class="dropdown-item border-radius-md">
+                  <span>Business</span>
+                </a>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown dropdown-hover mx-2">
+            <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
+              Courses
+              <img src="/static/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
+            </a>
+            <div class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages">
+              <ul class="d-none d-lg-block">
+                <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
+                  <a href="{% url 'optional-courses:course-list' %}">
+                    All courses
+                  </a>
+                </h6>
+                <a href="{% url 'optional-courses:course-detail' pk=11 %}" class="dropdown-item border-radius-md">
+                  <span>Mathematics for machine learning</span>
+                </a>
+                <a href="{% url 'optional-courses:course-detail' pk=5 %}" class="dropdown-item border-radius-md">
+                  <span>Meta back-end developer</span>
+                </a>
+                <a href="{% url 'optional-courses:course-detail' pk=6 %}" class="dropdown-item border-radius-md">
+                  <span>Meta front-end developer</span>
+                </a>
+                <a href="{% url 'optional-courses:course-detail' pk=2 %}" class="dropdown-item border-radius-md">
+                  <span>Neural networks</span>
+                </a>
+                <a href="{% url 'optional-courses:course-detail' pk=7 %}" class="dropdown-item border-radius-md">
+                  <span>Software design and architecture</span>
+                </a>
+                <a href="{% url 'optional-courses:course-detail' pk=14 %}" class="dropdown-item border-radius-md">
+                  <span>Robotics</span>
+                </a>
+                <a href="{% url 'optional-courses:course-list' %}" class="border-radius-md">
+                  <span>See other courses</span>
+                </a>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown dropdown-hover mx-2">
+            <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
+              Students' specializations
+              <img src="/static/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
+            </a>
+            <div class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages">
+              <ul class="d-none d-lg-block">
+                <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
+                  <a href="{% url 'optional-courses:specialization-list' %}">
+                    All specializations
+                  </a>
+                </h6>
+                <a href="{% url 'optional-courses:specialization-detail' pk=2 %}" class="dropdown-item border-radius-md">
+                  <span>Computer science</span>
+                </a>
+                <a href="{% url 'optional-courses:specialization-detail' pk=1 %}" class="dropdown-item border-radius-md">
+                  <span>Economic cybernetics</span>
+                </a>
+                <a href="{% url 'optional-courses:specialization-detail' pk=3 %}" class="dropdown-item border-radius-md">
+                  <span>Systems analysis</span>
+                </a>
+                <a href="{% url 'optional-courses:specialization-detail' pk=4 %}" class="dropdown-item border-radius-md">
+                  <span>Cybersecurity</span>
+                </a>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown dropdown-hover mx-2">
+            <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false" href="{% url 'optional-courses:student-list' %}">
+              Students
+            </a>
+          </li>
+
+          <li>
+            <div class="github-buttons">
+              {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" target="_blank" class="btn bg-gradient-secondary mb-5 mb-sm-0">Log out</a>
+              {% else %}
+                <a href="{% url 'login' %}" target="_blank" class="btn bg-gradient-primary mb-5 mb-sm-0">Log in</a>
+              {% endif %}
+                <div class="github-button">
+                  <span></span>
+                </div>
+              </div>
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+</div>
+</div>
+</div>
+
+<!-- End Navbar -->
+
+
+
+<header class="header-2">
+  <div class="page-header min-vh-75 relative" style="background-image: url('/static/img/gates.jpg')">
+    <span class="mask opacity-4"></span>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7 text-center mx-auto">
+          <h1 class="text-white pt-3 mt-n5">University</h1>
+          <p class="lead text-white mt-3">Optional courses <br/> Explore your speciality further to solve even more complex tasks  </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
+
+<section class="pt-3 pb-4" id="count-stats">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9 mx-auto py-3">
+        <div class="row">
+          <div class="col-md-4 position-relative">
+            <div class="p-3 text-center">
+              <h1 class="text-gradient text-primary">{{ num_fields }}</h1>
+              <h5 class="mt-3">Fields of study</h5>
+              <p class="text-sm font-weight-normal">All branches of information technologies</p>
+            </div>
+            <hr class="vertical dark">
+          </div>
+          <div class="col-md-4 position-relative">
+            <div class="p-3 text-center">
+              <h1 class="text-gradient text-primary">{{ num_courses }}</h1>
+              <h5 class="mt-3">Courses</h5>
+              <p class="text-sm font-weight-normal">Discover even more interesting features of your specialization</p>
+            </div>
+            <hr class="vertical dark">
+          </div>
+          <div class="col-md-4">
+            <div class="p-3 text-center">
+              <h1 class="text-gradient text-primary" id="state3">{{ num_students }}</h1>
+              <h5 class="mt-3">Students</h5>
+              <p class="text-sm font-weight-normal">Be one of the first students to start taking optional courses</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="my-5 py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-4 ms-auto me-auto p-lg-4 mt-lg-0 mt-4">
+        <div class="rotating-card-container">
+          <div class="card card-rotate card-background card-background-mask-primary shadow-primary mt-md-0 mt-5">
+            <div class="front front-background" style="background-image: url('/static/img/card_face.jpg'); background-size: cover;">
+              <div class="card-body py-7 text-center">
+                <i class="material-icons text-white text-4xl my-3">touch_app</i>
+                <h3 class="text-white">Explore the <br /> possibilities</h3>
+                <p class="text-white opacity-8">Everything to increase your expertness and competitiveness.</p>
+              </div>
+            </div>
+            <div class="back back-background" style="background-image: url('/static/img/card_back.jpg'); background-size: cover;">
+              <div class="card-body pt-7 text-center">
+                <h3 class="text-white">Deepen your knowledge</h3>
+                <p class="text-white opacity-8"> Start taking optional courses to become the leading expert.</p>
+                <a href="{% url 'optional-courses:course-list' %}" target="_blank" class="btn btn-white btn-sm w-50 mx-auto mt-3">Courses</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 ms-auto">
+        <div class="row justify-content-start">
+          <div class="col-md-6">
+            <div class="info">
+              <h5 class="font-weight-bolder mt-3">Courses</h5>
+              <p class="pe-5">Developed to help you become an expert in information technologies and guarantee a fast career start.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="info">
+              <h5 class="font-weight-bolder mt-3">Fields</h5>
+              <p class="pe-3">Chosen according to the leading IT branches such as web development, artificial intelligence, machine learning and so on.</p>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-start mt-5">
+          <div class="col-md-6 mt-3">
+            <h5 class="font-weight-bolder mt-3">Students</h5>
+            <p class="pe-5">Students taking the course have already shown great exam results and some even received job offers before graduation.</p>
+          </div>
+          <div class="col-md-6 mt-3">
+            <div class="info">
+              <h5 class="font-weight-bolder mt-3">Specializations</h5>
+              <p class="pe-3">Student from {{ num_specializations }} different specializations of the Information Technologies Institute are currently taking the courses.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+
+
+
+  <footer class="footer pt-5 mt-5">
+  <div class="container">
+    <div class=" row">
+      <div class="col-md-3 mb-4 ms-auto">
+        <div>
+          <a href="https://www.harvard.edu/">
+            <img src="/static/img/harvard.png" class="mb-3 footer-logo" alt="main_logo">
+            <h6 class="font-weight-bolder mb-4">University</h6>
+          </a>
+        </div>
+        <div>
+          <ul class="d-flex flex-row ms-n3 nav">
+            <li class="nav-item">
+              <a class="nav-link pe-1" href="https://www.facebook.com/Harvard/" target="_blank">
+                <i class="fab fa-facebook text-lg opacity-8"></i>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link pe-1" href="https://twitter.com/Harvard?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" target="_blank">
+                <i class="fab fa-twitter text-lg opacity-8"></i>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link pe-1" href="https://www.youtube.com/channel/UCLv7Gzc3VTO6ggFlXY0sOyw" target="_blank">
+                <i class="fab fa-youtube text-lg opacity-8"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
+
+      <div class="col-md-2 col-sm-6 col-6 mb-4">
+        <div>
+          <h6 class="text-sm">Security & Brand</h6>
+          <ul class="flex-column ms-n3 nav">
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.harvard.edu/copyright-issue/" target="_blank">
+                Report Copyright Infringement
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.harvard.edu/security-issue/" target="_blank">
+                Report Security Issue
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="https://trademark.harvard.edu/pages/trademark-notice" target="_blank">
+                Trademark Notice
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-sm-6 col-6 mb-4">
+        <div>
+          <h6 class="text-sm">Website</h6>
+          <ul class="flex-column ms-n3 nav">
+            <li class="nav-item">
+              <a class="nav-link" href="https://accessibility.harvard.edu/" target="_blank">
+                Accessibility
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="https://accessibility.huit.harvard.edu/digital-accessibility-policy" target="_blank">
+                Digital Accessibility
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.harvard.edu/privacy-statement/" target="_blank">
+                Privacy Statement
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-sm-6 col-6 mb-4">
+        <div>
+          <h6 class="text-sm">Get In Touch</h6>
+          <ul class="flex-column ms-n3 nav">
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.harvard.edu/contact-harvard/" target="_blank">
+                Contact Us
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.harvard.edu/academics/" target="_blank">
+                Academics
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://hr.harvard.edu/jobs" target="_blank">
+                Jobs
+              </a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-sm-6 col-6 mb-4">
+        <div>
+          <h6 class="text-sm">Visit</h6>
+          <ul class="flex-column ms-n3 nav">
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.harvard.edu/visit/tours/" target="_blank">
+                Tours
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.harvard.edu/visit/maps-directions/" target="_blank">
+                Maps and Directions
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.harvard.edu/visit/tour-providers/" target="_blank">
+                Tour Providers
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="col-12">
+        <div class="text-center">
+          <p class="text-dark my-4 text-sm font-weight-normal">
+            © 2023 The President and Fellows of <a href="https://www.harvard.edu/" target="_blank">Harvard</a> College.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+
+</html>
