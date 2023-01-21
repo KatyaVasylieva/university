@@ -1,0 +1,123 @@
+<div class="navbar-brand font-weight-bolder ms-sm-3" rel="tooltip" title="Designed and Coded by Creative Tim" data-placement="bottom">
+  <a href="{% url 'optional-courses:index' %}">Optional courses</a>
+</div>
+<div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
+  <ul class="navbar-nav navbar-nav-hover ms-auto">
+
+    <li class="nav-item dropdown dropdown-hover mx-2">
+      <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
+        Fields of study
+        <img src="/static/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
+      </a>
+      <div class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages">
+        <ul class="d-none d-lg-block">
+          <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
+            <a href="{% url 'optional-courses:field-list' %}">
+              All fields
+            </a>
+          </h6>
+          <a href="{% url 'optional-courses:field-detail' pk=1 %}" class="dropdown-item border-radius-md">
+            <span>Data science</span>
+          </a>
+          <a href="{% url 'optional-courses:field-detail' pk=2 %}" class="dropdown-item border-radius-md">
+            <span>Computer science</span>
+          </a>
+          <a href="{% url 'optional-courses:field-detail' pk=4 %}" class="dropdown-item border-radius-md">
+            <span>Math and logic</span>
+          </a>
+          <a href="{% url 'optional-courses:field-detail' pk=5 %}" class="dropdown-item border-radius-md">
+            <span>Physical science and engineering</span>
+          </a>
+          <a href="{% url 'optional-courses:field-detail' pk=3 %}" class="dropdown-item border-radius-md">
+            <span>Business</span>
+          </a>
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item dropdown dropdown-hover mx-2">
+      <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
+        Courses
+        <img src="/static/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
+      </a>
+      <div class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages">
+        <ul class="d-none d-lg-block">
+          <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
+            <a href="{% url 'optional-courses:course-list' %}">
+              All courses
+            </a>
+          </h6>
+          <a href="{% url 'optional-courses:course-detail' pk=11 %}" class="dropdown-item border-radius-md">
+            <span>Mathematics for machine learning</span>
+          </a>
+          <a href="{% url 'optional-courses:course-detail' pk=5 %}" class="dropdown-item border-radius-md">
+            <span>Meta back-end developer</span>
+          </a>
+          <a href="{% url 'optional-courses:course-detail' pk=6 %}" class="dropdown-item border-radius-md">
+            <span>Meta front-end developer</span>
+          </a>
+          <a href="{% url 'optional-courses:course-detail' pk=2 %}" class="dropdown-item border-radius-md">
+            <span>Neural networks</span>
+          </a>
+          <a href="{% url 'optional-courses:course-detail' pk=7 %}" class="dropdown-item border-radius-md">
+            <span>Software design and architecture</span>
+          </a>
+          <a href="{% url 'optional-courses:course-detail' pk=14 %}" class="dropdown-item border-radius-md">
+            <span>Robotics</span>
+          </a>
+          <a href="{% url 'optional-courses:course-list' %}" class="border-radius-md">
+            <span>See other courses</span>
+          </a>
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item dropdown dropdown-hover mx-2">
+      <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
+        Students' specializations
+        <img src="/static/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
+      </a>
+      <div class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages">
+        <ul class="d-none d-lg-block">
+          <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
+            <a href="{% url 'optional-courses:specialization-list' %}">
+              All specializations
+            </a>
+          </h6>
+          <a href="{% url 'optional-courses:specialization-detail' pk=2 %}" class="dropdown-item border-radius-md">
+            <span>Computer science</span>
+          </a>
+          <a href="{% url 'optional-courses:specialization-detail' pk=1 %}" class="dropdown-item border-radius-md">
+            <span>Economic cybernetics</span>
+          </a>
+          <a href="{% url 'optional-courses:specialization-detail' pk=3 %}" class="dropdown-item border-radius-md">
+            <span>Systems analysis</span>
+          </a>
+          <a href="{% url 'optional-courses:specialization-detail' pk=4 %}" class="dropdown-item border-radius-md">
+            <span>Cybersecurity</span>
+          </a>
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item dropdown dropdown-hover mx-2">
+      <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false" href="{% url 'optional-courses:student-list' %}">
+        Students
+      </a>
+    </li>
+
+    <li>
+      <div class="github-buttons">
+        {% if user.is_authenticated %}
+          <a href="{% url 'logout' %}" target="_blank" class="btn bg-gradient-secondary mb-5 mb-sm-0">Log out</a>
+        {% else %}
+          <a href="{% url 'login' %}" target="_blank" class="btn bg-gradient-primary mb-5 mb-sm-0">Log in</a>
+        {% endif %}
+          <div class="github-button">
+            <span></span>
+          </div>
+        </div>
+    </li>
+
+  </ul>
+</div>
