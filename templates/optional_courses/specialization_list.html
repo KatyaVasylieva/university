@@ -1,24 +1,49 @@
-{% extends "base.html" %}
-{% load crispy_forms_filters %}
+{% extends "base_list.html" %}
+
+{% block path %}
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div class="mb-4 w-100 w-md-50 w-lg-25">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb me-auto">
+          <li class="breadcrumb-item"><a href="{% url 'optional-courses:index' %}">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Specializations and groups</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+{% endblock %}
+
 
 {% block content %}
-  <h1>
-    Specialization list
-  </h1>
-
-    <ul>
-      {% for spec in specialization_list %}
+  <div class="col-lg-5 my-auto">
+    <nav aria-label="breadcrumb">
+      <h3>Specializations and groups</h3>
+      <p class="pe-5">Check out if any of your group mates are already taking optional courses. You could even be the first to try and share your achievements with your group.</p>
+    </nav>
+  </div>
+  <div class="col-lg-6 mt-lg-0 mt-5 ps-lg-0 ps-0">
+    <ul style="list-style: none">
+      {% for specialization in specialization_list %}
         <li>
-          <a href="{{ spec.get_absolute_url }}">{{ spec.name }}</a>
-            <ul>
-              {% for group in spec.groups.all %}
-                <li>
-                  <a href="{{ group.get_absolute_url }}">{{ group.short_name }}</a>
-                </li>
-              {% endfor %}
-            </ul>
+           <div class="p-3 info-horizontal">
+             <div class="icon icon-shape  bg-gradient-primary shadow-primary text-center">
+               <i class="fas fa-arrow-right opacity-10"></i>
+             </div>
+             <div class="description ps-3">
+              <p class="mb-0">
+                <a href="{{ specialization.get_absolute_url }}"><strong>{{ specialization }}</strong></a>
+                <ul>
+                  {% for group in specialization.groups.all %}
+                    <li>
+                      <a href="{% url 'optional-courses:group-detail' pk=group.id %}">{{ group }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+            </div>
+          </div>
         </li>
       {% endfor %}
     </ul>
-
+  </div>
 {% endblock %}
