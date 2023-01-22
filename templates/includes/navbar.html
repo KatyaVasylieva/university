@@ -74,14 +74,14 @@
 
     <li class="nav-item dropdown dropdown-hover mx-2">
       <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
-        Students' specializations
+        Students' specializations and groups
         <img src="/static/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
       </a>
       <div class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages">
         <ul class="d-none d-lg-block">
           <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
             <a href="{% url 'optional-courses:specialization-list' %}">
-              All specializations
+              All specializations and groups
             </a>
           </h6>
           <a href="{% url 'optional-courses:specialization-detail' pk=2 %}" class="dropdown-item border-radius-md">
