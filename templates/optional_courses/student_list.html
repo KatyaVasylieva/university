@@ -1,26 +1,74 @@
-{% extends "base.html" %}
-{% load crispy_forms_filters %}
+{#{% extends "base.html" %}#}
+{#{% load crispy_forms_filters %}#}
+{##}
+{#{% block content %}#}
+{#  <h1>#}
+{#    Student list#}
+{#    <a href="{% url 'optional-courses:student-create' %}" class="btn btn-primary link-to-page">#}
+{#      Create#}
+{#    </a>#}
+{#  </h1>#}
+{##}
+{#  <form action="" method="get">#}
+{#    {{ search_form|crispy }}#}
+{#    <input type="submit" value="Search" class="btn btn-light">#}
+{#  </form>#}
+{##}
+{#  <ul>#}
+{#    {% for student in student_list %}#}
+{#      <li>#}
+{#        <a href="{{ student.get_absolute_url }}">{{ student }}</a>#}
+{#      </li>#}
+{#    {% endfor %}#}
+{#  </ul>#}
+{##}
+{##}
+{#{% endblock %}#}
+
+
+{% extends "base_list.html" %}
+
+{% block path %}
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div class="mb-4 w-100 w-md-50 w-lg-25">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb me-auto">
+          <li class="breadcrumb-item"><a href="{% url 'optional-courses:index' %}">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Students</li>
+        </ol>
+      </nav>
+    </div>
+    <div>
+      <button type="button" class="btn bg-gradient-primary w-auto me-2">
+        <a href="{% url 'optional-courses:student-create' %}" class="text-white">Create student</a>
+      </button>
+    </div>
+  </div>
+
+{% endblock %}
+
 
 {% block content %}
-  <h1>
-    Student list
-    <a href="{% url 'optional-courses:student-create' %}" class="btn btn-primary link-to-page">
-      Create
-    </a>
-  </h1>
-
-  <form action="" method="get">
-    {{ search_form|crispy }}
-    <input type="submit" value="Search" class="btn btn-light">
-  </form>
-
-  <ul>
-    {% for student in student_list %}
-      <li>
-        <a href="{{ student.get_absolute_url }}">{{ student }}</a>
-      </li>
-    {% endfor %}
-  </ul>
-
-
+  <div class="col-lg-5 my-auto">
+    <nav aria-label="breadcrumb">
+      <h3>Students</h3>
+      <p class="pe-5">Go through the list of student taking optional courses. It could be a great idea to join your friends or chose a new course to introduce it to them.</p>
+    </nav>
+  </div>
+  <div class="col-lg-6 mt-lg-0 mt-5 ps-lg-0 ps-0">
+    <ul style="list-style: none">
+      {% for student in student_list %}
+        <li>
+           <div class="p-3 info-horizontal">
+             <div class="icon icon-shape  bg-gradient-primary shadow-primary text-center">
+               <i class="fas fa-arrow-right opacity-10"></i>
+             </div>
+            <div class="description ps-3">
+              <p class="mb-0"><strong><a href="{% url 'optional-courses:student-detail' pk=student.id %}">{{ student }}</a></strong><br>Taking {{ student.num_courses }} course{{ student.num_courses|pluralize }}</p>
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock %}
