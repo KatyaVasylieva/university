@@ -37,7 +37,7 @@
              </div>
             <div class="description ps-3">
               <p class="mb-0">
-                <a href="{{ course.get_absolute_url }}">{{ course }}</a><br>Fields: {% for field in course.fields.all %}{{ field }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                <a href="{{ course.get_absolute_url }}"><strong>{{ course }}</strong></a><br>Fields: {% for field in course.fields.all %}{{ field }}{% if not forloop.last %}, {% endif %}{% endfor %}
               </p>
             </div>
           </div>
