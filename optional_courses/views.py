@@ -90,6 +90,11 @@ class CourseFieldsUpdateView(LoginRequiredMixin, generic.UpdateView):
     form_class = CourseUpdateFieldsForm
 
 
+class CourseDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Course
+    success_url = reverse_lazy("optional-courses:course-list")
+
+
 class SpecializationListView(LoginRequiredMixin, generic.ListView):
     queryset = Specialization.objects.prefetch_related("groups")
 
