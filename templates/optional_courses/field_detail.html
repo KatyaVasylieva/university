@@ -1,14 +1,16 @@
 {% extends "base_styled.html" %}
 
 {% block path %}
-  <div class="mb-4 w-100 w-md-50 w-lg-25">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url 'optional-courses:index' %}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'optional-courses:field-list' %}">Fields of study</a></li>
-        <li class="breadcrumb-item active" aria-current="page">{{ field }}</li>
-      </ol>
-    </nav>
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div class="mb-4">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'optional-courses:index' %}">Home</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'optional-courses:field-list' %}">Fields of study</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{ field }}</li>
+        </ol>
+      </nav>
+    </div>
   </div>
 {% endblock %}
 
