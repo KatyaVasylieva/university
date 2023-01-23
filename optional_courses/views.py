@@ -117,7 +117,9 @@ class StudentListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        queryset = get_user_model().objects.annotate(num_courses=Count("courses"))
+        queryset = get_user_model().objects.annotate(
+            num_courses=Count("courses")
+        ).order_by("last_name")
 
         username = self.request.GET.get("username")
 
