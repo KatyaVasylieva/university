@@ -1,0 +1,20 @@
+{% load crispy_forms_filters %}
+
+<section>
+  <div class="container py-2">
+    <div class="row">
+      <div class="col-lg-3 mx-auto d-flex justify-content-center flex-column">
+        <form role="form" id="contact-form" method="get" autocomplete="off">
+          <div class="card-body">
+            <div class="mb-4">
+              <div class="input-group input-group-dynamic">
+                <div style="width: 90%">{{ search_form|crispy }}</div>
+                <input type="submit" class="form-control" value="&#128270;">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
