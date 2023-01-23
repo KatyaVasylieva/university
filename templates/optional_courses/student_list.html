@@ -1,32 +1,5 @@
-{#{% extends "base.html" %}#}
-{#{% load crispy_forms_filters %}#}
-{##}
-{#{% block content %}#}
-{#  <h1>#}
-{#    Student list#}
-{#    <a href="{% url 'optional-courses:student-create' %}" class="btn btn-primary link-to-page">#}
-{#      Create#}
-{#    </a>#}
-{#  </h1>#}
-{##}
-{#  <form action="" method="get">#}
-{#    {{ search_form|crispy }}#}
-{#    <input type="submit" value="Search" class="btn btn-light">#}
-{#  </form>#}
-{##}
-{#  <ul>#}
-{#    {% for student in student_list %}#}
-{#      <li>#}
-{#        <a href="{{ student.get_absolute_url }}">{{ student }}</a>#}
-{#      </li>#}
-{#    {% endfor %}#}
-{#  </ul>#}
-{##}
-{##}
-{#{% endblock %}#}
-
-
 {% extends "base_list.html" %}
+
 
 {% block path %}
   <div style="display: flex; align-items: center; justify-content: space-between;">
@@ -44,7 +17,11 @@
       </button>
     </div>
   </div>
+{% endblock %}
 
+
+{% block search %}
+  {% include 'includes/search.html' %}
 {% endblock %}
 
 
