@@ -104,7 +104,7 @@ class SpecializationDetailView(LoginRequiredMixin, generic.DetailView):
 
 
 class UniversityGroupDetailView(LoginRequiredMixin, generic.DetailView):
-    model = UniversityGroup
+    queryset = UniversityGroup.objects.prefetch_related("students__courses")
     template_name = "optional_courses/group_detail.html"
 
 
