@@ -38,8 +38,9 @@ class CourseTitleSearchForm(forms.Form):
     title = forms.CharField(
         max_length=255,
         required=False,
+        label="",
         widget=forms.TextInput(
-            attrs={"placeholder": "Start typing the course title here"}
+            attrs={"placeholder": "Search courses by title"}
         )
     )
 
@@ -86,8 +87,9 @@ class StudentUsernameSearchForm(forms.Form):
     username = forms.CharField(
         max_length=255,
         required=False,
+        label="",
         widget=forms.TextInput(
-            attrs={"placeholder": "Start typing the student username here"}
+            attrs={"placeholder": "Search students by username"}
         )
     )
 
