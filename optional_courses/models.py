@@ -80,7 +80,7 @@ class Student(AbstractUser):
     )
 
     class Meta:
-        ordering = ["last_name"]
+        ordering = ["username"]
         constraints = [
             UniqueConstraint(
                 fields=["first_name", "last_name"],
