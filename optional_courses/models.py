@@ -72,7 +72,8 @@ class Student(AbstractUser):
     group = models.ForeignKey(
         UniversityGroup,
         on_delete=models.CASCADE,
-        related_name="students"
+        related_name="students",
+        null=True,
     )
     courses = models.ManyToManyField(
         Course,
