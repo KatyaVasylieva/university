@@ -1,8 +1,13 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from optional_courses.models import Student, UniversityGroup,\
-    Course, Specialization, Field
+from optional_courses.models import (
+    Student,
+    UniversityGroup,
+    Course,
+    Specialization,
+    Field
+)
 
 
 @admin.register(Student)

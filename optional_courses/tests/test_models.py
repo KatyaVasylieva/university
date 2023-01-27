@@ -1,8 +1,12 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from optional_courses.models import Specialization, UniversityGroup,\
-    Field, Course
+from optional_courses.models import (
+    Specialization,
+    UniversityGroup,
+    Field,
+    Course
+)
 
 
 class ModelTests(TestCase):

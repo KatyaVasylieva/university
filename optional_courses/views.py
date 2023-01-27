@@ -15,8 +15,12 @@ from optional_courses.forms import (
     StudentUpdateForm,
     StudentUsernameSearchForm
 )
-from optional_courses.models import Field, Course, Specialization, \
+from optional_courses.models import (
+    Field,
+    Course,
+    Specialization,
     UniversityGroup
+)
 
 
 @login_required

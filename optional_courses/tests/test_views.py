@@ -3,8 +3,12 @@ from django.test import TestCase, Client
 
 from django.urls import reverse
 
-from optional_courses.models import Specialization, Field, Course,\
+from optional_courses.models import (
+    Specialization,
+    Field,
+    Course,
     UniversityGroup
+)
 
 
 class PublicViewsTests(TestCase):

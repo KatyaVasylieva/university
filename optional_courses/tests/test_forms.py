@@ -1,10 +1,18 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from optional_courses.forms import CourseCreateForm, \
-    CourseUpdateFieldsForm, StudentCreationForm, StudentUpdateForm
-from optional_courses.models import Field, Course, Specialization, \
+from optional_courses.forms import (
+    CourseCreateForm,
+    CourseUpdateFieldsForm,
+    StudentCreationForm,
+    StudentUpdateForm
+)
+from optional_courses.models import (
+    Field,
+    Course,
+    Specialization,
     UniversityGroup
+)
 
 
 class FormTests(TestCase):
