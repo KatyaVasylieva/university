@@ -17,3 +17,4 @@ pycodestyle==2.9.1
 pyflakes==2.5.0
 soupsieve==2.3.2.post1
 sqlparse==0.4.3
+whitenoise==6.3.0
