@@ -1,5 +1,8 @@
 <div class="navbar-brand font-weight-bolder ms-sm-3" rel="tooltip" title="Designed and Coded by Creative Tim" data-placement="bottom">
-  <a href="{% url 'optional-courses:index' %}">Optional courses</a>
+  <a href="{% url 'optional-courses:index' %}">Optional courses</a> |
+  <div class="dropdown-item border-radius-md" style="display: inline">
+    User: <a href="{% url 'optional-courses:student-detail' pk=user.id %}">{{ user.username }}</a>
+  </div>
 </div>
 <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
   <ul class="navbar-nav navbar-nav-hover ms-auto">
