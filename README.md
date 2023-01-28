@@ -19,23 +19,15 @@ cd university
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+python manage.py migrate
 ```
 
 Set environment variables:
 
 ```shell
-export SECRET_KEY='django-insecure-mft9u&!rrp@7_w5o5jvp6hrz&_o#ft6@hqbwys#u+3g2)^t4&u'
-export DATABASE_URL="postgres://zlukijyb:KbP_iXPt69-mYsyHmXNX97zvqaJCK4tD@snuffleupagus.db.elephantsql.com/zlukijyb"
-```
-
-Choose one of the options:
-
-```shell
-export DJANGO_DEBUG=True # to run the server in debug mode
-```
-
-```shell
-export DJANGO_DEBUG=False # for production
+export DJANGO_DEBUG=<False to run in DEBUG=False or True for DEBUG=True>
+export SECRET_KEY=<your SECRET_KEY>
+export DATABASE_URL=<your DATABASE_URL>
 ```
 
 Run Django server:
