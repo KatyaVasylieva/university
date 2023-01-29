@@ -1,0 +1,51 @@
+{% extends "base_styled.html" %}
+{% load crispy_forms_filters %}
+
+{% block path %}
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div class="mb-4">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb me-auto">
+          <li class="breadcrumb-item"><a href="{% url 'optional-courses:index' %}">Home</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'optional-courses:course-list' %}">Courses</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'optional-courses:course-detail' pk=course.id %}">{{ course }}</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Delete</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block content %}
+<section>
+  <div class="container py-4">
+    <div class="row">
+      <div class="col-lg-7 mx-auto d-flex justify-content-center flex-column">
+        <h3 class="text-center">
+            Delete {{ course }}
+        </h3>
+        <div class="col-lg-8 col-10 ms-auto me-auto text-center">
+          Are you sure you want to delete this course?<br>
+          Please note, if you didn't create this course, you'd better not delete it.
+        </div>
+        <form role="form" id="contact-form" method="post" autocomplete="off">
+          <div class="card-body">
+            <div class="row">
+              <div class="input-group input-group-dynamic" style="display: block;">
+                {% csrf_token %}
+                {{ form|crispy }}
+              </div>
+              <div class="col-md-4 mt-lg-3 mx-auto">
+                <button type="submit" class="btn bg-gradient-dark w-100">
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

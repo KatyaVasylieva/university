@@ -1,0 +1,198 @@
+{% load crispy_forms_filters %}
+
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="/static/img/harvard.png">
+  <link rel="icon" type="image/png" href="/static/img/harvard.png">
+  <title>
+    University | Log out
+  </title>
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- CSS Files -->
+  <link id="pagestyle" href="/static/css/material-kit.css?v=3.0.4" rel="stylesheet" />
+</head>
+
+<body class="sign-in-basic">
+  <!-- Navbar Transparent -->
+  <nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3  navbar-transparent ">
+    <div class="navbar-brand font-weight-bolder ms-sm-3" rel="tooltip" data-placement="bottom">
+      <a href="{% url 'optional-courses:index' %}" style="color:whitesmoke;">Optional courses</a>
+    </div>
+    <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
+      <ul class="navbar-nav navbar-nav-hover ms-auto">
+
+        <li class="nav-item dropdown dropdown-hover mx-2">
+          <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
+            Fields of study
+            <img src="/static/img/down_arrow_dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
+          </a>
+          <div class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages">
+            <ul class="d-none d-lg-block">
+              <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
+                <a href="{% url 'optional-courses:field-list' %}">
+                  All fields
+                </a>
+              </h6>
+              <a href="{% url 'optional-courses:field-detail' pk=1 %}" class="dropdown-item border-radius-md">
+                <span>Data science</span>
+              </a>
+              <a href="{% url 'optional-courses:field-detail' pk=2 %}" class="dropdown-item border-radius-md">
+                <span>Computer science</span>
+              </a>
+              <a href="{% url 'optional-courses:field-detail' pk=4 %}" class="dropdown-item border-radius-md">
+                <span>Math and logic</span>
+              </a>
+              <a href="{% url 'optional-courses:field-detail' pk=5 %}" class="dropdown-item border-radius-md">
+                <span>Physical science and engineering</span>
+              </a>
+              <a href="{% url 'optional-courses:field-detail' pk=3 %}" class="dropdown-item border-radius-md">
+                <span>Business</span>
+              </a>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown dropdown-hover mx-2">
+          <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
+            Courses
+            <img src="/static/img/down_arrow_dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
+          </a>
+          <div class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages">
+            <ul class="d-none d-lg-block">
+              <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
+                <a href="{% url 'optional-courses:course-list' %}">
+                  All courses
+                </a>
+              </h6>
+              <a href="{% url 'optional-courses:course-detail' pk=11 %}" class="dropdown-item border-radius-md">
+                <span>Mathematics for machine learning</span>
+              </a>
+              <a href="{% url 'optional-courses:course-detail' pk=5 %}" class="dropdown-item border-radius-md">
+                <span>Meta back-end developer</span>
+              </a>
+              <a href="{% url 'optional-courses:course-detail' pk=6 %}" class="dropdown-item border-radius-md">
+                <span>Meta front-end developer</span>
+              </a>
+              <a href="{% url 'optional-courses:course-detail' pk=2 %}" class="dropdown-item border-radius-md">
+                <span>Neural networks</span>
+              </a>
+              <a href="{% url 'optional-courses:course-detail' pk=7 %}" class="dropdown-item border-radius-md">
+                <span>Software design and architecture</span>
+              </a>
+              <a href="{% url 'optional-courses:course-detail' pk=14 %}" class="dropdown-item border-radius-md">
+                <span>Robotics</span>
+              </a>
+              <a href="{% url 'optional-courses:course-list' %}" class="border-radius-md">
+                <span>See other courses</span>
+              </a>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown dropdown-hover mx-2">
+          <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
+            Students' specializations and groups
+            <img src="/static/img/down_arrow_dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
+          </a>
+          <div class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages">
+            <ul class="d-none d-lg-block">
+              <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
+                <a href="{% url 'optional-courses:specialization-list' %}">
+                  All specializations and groups
+                </a>
+              </h6>
+              <a href="{% url 'optional-courses:specialization-detail' pk=2 %}" class="dropdown-item border-radius-md">
+                <span>Computer science</span>
+              </a>
+              <a href="{% url 'optional-courses:specialization-detail' pk=1 %}" class="dropdown-item border-radius-md">
+                <span>Economic cybernetics</span>
+              </a>
+              <a href="{% url 'optional-courses:specialization-detail' pk=3 %}" class="dropdown-item border-radius-md">
+                <span>Systems analysis</span>
+              </a>
+              <a href="{% url 'optional-courses:specialization-detail' pk=4 %}" class="dropdown-item border-radius-md">
+                <span>Cybersecurity</span>
+              </a>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown dropdown-hover mx-2">
+          <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false" href="{% url 'optional-courses:student-list' %}">
+            Students
+          </a>
+        </li>
+
+      </ul>
+    </div>
+
+  </nav>
+  <!-- End Navbar -->
+
+
+  <div class="page-header align-items-start min-vh-100" style="background-image: url('/static/img/university_log_in_out.jpg');">
+    <span class="mask opacity-6"></span>
+    <div class="container my-auto">
+      <div class="row">
+        <div class="col-lg-4 col-md-8 col-12 mx-auto">
+          <div class="card z-index-0 fadeIn3 fadeInBottom">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+                <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Log out</h4>
+              </div>
+            </div>
+            <div class="card-body">
+
+            <div style="text-align: center; margin: 3rem">
+              You are logged out!<br>
+              Click below to log in again.
+            </div>
+
+            <div class="text-center">
+              <a href="{% url 'login' %}" class="btn bg-gradient-primary mb-5 mb-sm-0" style="margin: 1rem">Log in</a>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer position-absolute bottom-2 py-2 w-100">
+      <div class="container">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-12 col-md-6 my-auto">
+            <div class="copyright text-center text-sm text-white text-lg-start">
+              © 2023 The President and Fellows of <a href="https://www.harvard.edu" style="color: whitesmoke">Harvard College</a>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+              <li class="nav-item">
+                <a href="https://www.facebook.com/Harvard/" class="nav-link text-white" target="_blank">Facebook</a>
+              </li>
+              <li class="nav-item">
+                <a href="https://twitter.com/harvard" class="nav-link text-white" target="_blank">Twitter</a>
+              </li>
+              <li class="nav-item">
+                <a href="https://www.instagram.com/harvard/" class="nav-link text-white" target="_blank">Instagram</a>
+              </li>
+              <li class="nav-item">
+                <a href="https://www.youtube.com/harvard" class="nav-link pe-0 text-white" target="_blank">Youtube</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>

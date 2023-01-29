@@ -1,0 +1,51 @@
+{% extends "base_styled.html" %}
+
+{% block path %}
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div class="mb-4 w-100 w-md-50 w-lg-25">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb me-auto">
+          <li class="breadcrumb-item"><a href="{% url 'optional-courses:index' %}">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Courses</li>
+        </ol>
+      </nav>
+    </div>
+    <div>
+      <button type="button" class="btn bg-gradient-primary w-auto me-2">
+        <a href="{% url 'optional-courses:course-create' %}" class="text-white">Create course</a>
+      </button>
+    </div>
+  </div>
+{% endblock %}
+
+{% block search %}
+  {% include 'includes/search.html' %}
+{% endblock %}
+
+
+{% block content %}
+  <div class="col-lg-5 my-auto">
+    <nav aria-label="breadcrumb">
+      <h3>Courses</h3>
+      <p class="pe-5">Have a look at one or more optional courses you'd like to take. Feel free to pick few courses of same study field or even different fields to broaden your professional horizons.</p>
+    </nav>
+  </div>
+  <div class="col-lg-6 mt-lg-0 mt-5 ps-lg-0 ps-0">
+    <ul style="list-style: none">
+      {% for course in course_list %}
+        <li>
+           <div class="p-3 info-horizontal">
+             <div class="icon icon-shape  bg-gradient-primary shadow-primary text-center">
+               <i class="fas fa-arrow-right opacity-10"></i>
+             </div>
+            <div class="description ps-3">
+              <p class="mb-0">
+                <a href="{{ course.get_absolute_url }}"><strong>{{ course }}</strong></a><br>Fields: {% for field in course.fields.all %}{{ field }}{% if not forloop.last %}, {% endif %}{% endfor %}
+              </p>
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

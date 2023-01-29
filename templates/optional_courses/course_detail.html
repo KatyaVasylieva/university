@@ -1,0 +1,83 @@
+{% extends "base_styled.html" %}
+
+{% block path %}
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div class="mb-4">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'optional-courses:index' %}">Home</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'optional-courses:course-list' %}">Courses</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{ course }}</li>
+        </ol>
+      </nav>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+      <div>
+        <button type="button" class="btn bg-gradient-primary w-auto me-2">
+          <a href="{% url 'optional-courses:course-update' pk=course.id %}" class="text-white">Update course</a>
+        </button>
+      </div>
+      <div>
+        <button type="button" class="btn bg-gradient-secondary w-auto me-2">
+          <a href="{% url 'optional-courses:course-delete' pk=course.id %}" class="text-white">Delete course</a>
+        </button>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block content %}
+<section>
+  <div class="container">
+
+    <div>
+      {% if course in user.courses.all %}
+        <button type="button" class="btn bg-gradient-secondary w-auto me-2" style="float: right; display: block">
+          <a href="{% url 'optional-courses:toggle-course-assignment' pk=course.id %}" class="text-white">Remove me from this course</a>
+        </button>
+      {% else %}
+        <button type="button" class="btn bg-gradient-primary w-auto me-2" style="float: right; display: block">
+          <a href="{% url 'optional-courses:toggle-course-assignment' pk=course.id %}" class="text-white">Assign me to this course</a>
+        </button>
+      {% endif %}
+    </div>
+    <div class="row" style="display: block">
+      <div class="col-lg-5 col-10 ms-auto me-auto text-center">
+        <h3 class="mt-4">{{ course }}</h3>
+        Field{{ course.fields.all|pluralize }}: {{ field }} {% for field in course.fields.all %}{{ field }}{% if not forloop.last %}, {% endif %}{% endfor %}
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-md-4 ms-auto my-auto">
+        <div class="cursor-pointer">
+          <div class="card card-background">
+            <div class="full-background" style="background-image: url('/static/img/course_detail.jpeg')"></div>
+            <div class="card-body pt-7 text-center">
+              <h4 class="text-white mb-5">See all courses</h4>
+              <button type="button" class="btn btn-white btn-sm mt-3"><a href="{% url 'optional-courses:course-list' %}">Take a look</a></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-5 me-auto my-auto ms-md-5">
+        <div class="p-3 info-horizontal d-flex">
+          <div>
+            {% if course.students.all %}
+              <h5>Students taking the course:</h5>
+              {% for student in course.students.all %}
+                <li class="pb-3">
+                  <a href="{% url 'optional-courses:student-detail' pk=student.id %}">{{ student }}</a>
+                </li>
+              {% endfor %}
+            {% else %}
+              Be the first to start taking the course!
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
