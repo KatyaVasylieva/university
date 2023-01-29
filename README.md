@@ -35,6 +35,10 @@ Run Django server:
 python manage.py runserver
 ```
 
+You can use the following user to login:
+  - Login: `user`
+  - Password: `qazcdetgb`
+
 ## Features
 
 * Authentication functionality for Student(User)
