@@ -45,7 +45,7 @@
             <h5>Groups of the specialization:</h5>
               {% for group in specialization.groups.all %}
                 <li class="pb-3">
-                  <a href="{% url 'optional-courses:group-detail' pk=group.id %}">{{ group }}</a> ({{ group.students.count }} student{{ group.students.count|pluralize }} are taking optional courses)
+                  <a href="{% url 'optional-courses:group-detail' pk=group.id %}">{{ group }}</a> ({{ group.students.count }} student{{ course.students.count|pluralize:" is,s are" }} taking optional courses)
                 </li>
               {% endfor %}
           </div>

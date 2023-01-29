@@ -4,7 +4,7 @@ Django project for managing students' assignments to optional courses.
 
 ## Check it out!
 
-[University project deployed on Heroku](LINK)
+[University project deployed on Render](https://university-4i2r.onrender.com/)
 
 
 ## Installation
@@ -34,6 +34,10 @@ Run Django server:
 ```shell
 python manage.py runserver
 ```
+
+You can use the following user to login:
+  - Login: `user`
+  - Password: `qazcdetgb`
 
 ## Features
 
