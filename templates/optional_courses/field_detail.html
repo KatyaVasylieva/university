@@ -42,7 +42,7 @@
             <h5>Courses of the field:</h5>
               {% for course in field.courses.all %}
                 <li class="pb-3">
-                  <a href="{% url 'optional-courses:course-detail' pk=course.id %}">{{ course }}</a> ({{ course.students.count }} student{{ course.students.count|pluralize }} are assigned)
+                  <a href="{% url 'optional-courses:course-detail' pk=course.id %}">{{ course }}</a> ({{ course.students.count }} student{{ course.students.count|pluralize:" is,s are" }} assigned)
                 </li>
               {% endfor %}
           </div>
