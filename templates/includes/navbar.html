@@ -3,6 +3,13 @@
   <div class="dropdown-item border-radius-md" style="display: inline">
     User: <a href="{% url 'optional-courses:student-detail' pk=user.id %}">{{ user.username }}</a>
   </div>
+  <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon mt-2">
+      <span class="navbar-toggler-bar bar1"></span>
+      <span class="navbar-toggler-bar bar2"></span>
+      <span class="navbar-toggler-bar bar3"></span>
+    </span>
+  </button>
 </div>
 <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
   <ul class="navbar-nav navbar-nav-hover ms-auto">
@@ -13,7 +20,7 @@
         <img src="/static/img/down_arrow_dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
       </a>
       <div class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages">
-        <ul class="d-none d-lg-block">
+        <div class="d-none d-lg-block">
           <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
             <a href="{% url 'optional-courses:field-list' %}">
               All fields
@@ -34,7 +41,29 @@
           <a href="{% url 'optional-courses:field-detail' pk=3 %}" class="dropdown-item border-radius-md">
             <span>Business</span>
           </a>
-        </ul>
+        </div>
+        <div class="d-lg-none">
+          <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
+            <a href="{% url 'optional-courses:field-list' %}">
+              All fields
+            </a>
+          </h6>
+          <a href="{% url 'optional-courses:field-detail' pk=1 %}" class="dropdown-item border-radius-md">
+            <span>Data science</span>
+          </a>
+          <a href="{% url 'optional-courses:field-detail' pk=2 %}" class="dropdown-item border-radius-md">
+            <span>Computer science</span>
+          </a>
+          <a href="{% url 'optional-courses:field-detail' pk=4 %}" class="dropdown-item border-radius-md">
+            <span>Math and logic</span>
+          </a>
+          <a href="{% url 'optional-courses:field-detail' pk=5 %}" class="dropdown-item border-radius-md">
+            <span>Physical science and engineering</span>
+          </a>
+          <a href="{% url 'optional-courses:field-detail' pk=3 %}" class="dropdown-item border-radius-md">
+            <span>Business</span>
+          </a>
+        </div>
       </div>
     </li>
 
@@ -44,7 +73,7 @@
         <img src="/static/img/down_arrow_dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
       </a>
       <div class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages">
-        <ul class="d-none d-lg-block">
+        <div class="d-none d-lg-block">
           <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
             <a href="{% url 'optional-courses:course-list' %}">
               All courses
@@ -71,7 +100,35 @@
           <a href="{% url 'optional-courses:course-list' %}" class="border-radius-md">
             <span>See other courses</span>
           </a>
-        </ul>
+        </div>
+        <div class="d-lg-none">
+          <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
+            <a href="{% url 'optional-courses:course-list' %}">
+              All courses
+            </a>
+          </h6>
+          <a href="{% url 'optional-courses:course-detail' pk=11 %}" class="dropdown-item border-radius-md">
+            <span>Mathematics for machine learning</span>
+          </a>
+          <a href="{% url 'optional-courses:course-detail' pk=5 %}" class="dropdown-item border-radius-md">
+            <span>Meta back-end developer</span>
+          </a>
+          <a href="{% url 'optional-courses:course-detail' pk=6 %}" class="dropdown-item border-radius-md">
+            <span>Meta front-end developer</span>
+          </a>
+          <a href="{% url 'optional-courses:course-detail' pk=2 %}" class="dropdown-item border-radius-md">
+            <span>Neural networks</span>
+          </a>
+          <a href="{% url 'optional-courses:course-detail' pk=7 %}" class="dropdown-item border-radius-md">
+            <span>Software design and architecture</span>
+          </a>
+          <a href="{% url 'optional-courses:course-detail' pk=14 %}" class="dropdown-item border-radius-md">
+            <span>Robotics</span>
+          </a>
+          <a href="{% url 'optional-courses:course-list' %}" class="border-radius-md">
+            <span>See other courses</span>
+          </a>
+        </div>
       </div>
     </li>
 
@@ -81,7 +138,7 @@
         <img src="/static/img/down_arrow_dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
       </a>
       <div class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages">
-        <ul class="d-none d-lg-block">
+        <div class="d-none d-lg-block">
           <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
             <a href="{% url 'optional-courses:specialization-list' %}">
               All specializations and groups
@@ -99,7 +156,26 @@
           <a href="{% url 'optional-courses:specialization-detail' pk=4 %}" class="dropdown-item border-radius-md">
             <span>Cybersecurity</span>
           </a>
-        </ul>
+        </div>
+        <div class="d-lg-none">
+          <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
+            <a href="{% url 'optional-courses:specialization-list' %}">
+              All specializations and groups
+            </a>
+          </h6>
+          <a href="{% url 'optional-courses:specialization-detail' pk=2 %}" class="dropdown-item border-radius-md">
+            <span>Computer science</span>
+          </a>
+          <a href="{% url 'optional-courses:specialization-detail' pk=1 %}" class="dropdown-item border-radius-md">
+            <span>Economic cybernetics</span>
+          </a>
+          <a href="{% url 'optional-courses:specialization-detail' pk=3 %}" class="dropdown-item border-radius-md">
+            <span>Systems analysis</span>
+          </a>
+          <a href="{% url 'optional-courses:specialization-detail' pk=4 %}" class="dropdown-item border-radius-md">
+            <span>Cybersecurity</span>
+          </a>
+        </div>
       </div>
     </li>
 
@@ -124,3 +200,10 @@
 
   </ul>
 </div>
+
+    <!--   Core JS Files   -->
+<script src="/static/js/popper.min.js" type="text/javascript"></script>
+<script src="/static/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/static/js/perfect-scrollbar.min.js"></script>
+<!--  Plugin for Parallax, full documentation here: https://github.com/wagerfield/parallax  -->
+<script src="/static/js/parallax.min.js"></script>
