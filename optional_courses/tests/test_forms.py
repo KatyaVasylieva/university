@@ -1,4 +1,3 @@
-from django.contrib.auth import get_user_model
 from django.test import TestCase
 
 from optional_courses.forms import (
@@ -7,70 +6,20 @@ from optional_courses.forms import (
     StudentCreationForm,
     StudentUpdateForm
 )
-from optional_courses.models import (
-    Field,
-    Course,
-    Specialization,
-    UniversityGroup
-)
+
+from . import create_initial_data
 
 
 class FormTests(TestCase):
 
     def setUp(self):
-        self.field_ds = Field.objects.create(
-            name="Data science"
-        )
-
-        self.field_m = Field.objects.create(
-            name="Math and logic"
-        )
-
-        self.field_cs = Field.objects.create(
-            name="Computer sciense"
-        )
-
-        self.field_e = Field.objects.create(
-            name="Engineering"
-        )
-
-        self.specialization_ec = Specialization.objects.create(
-            name="Economic cybernetics",
-            description="Economic systems, mathematical modeling"
-        )
-
-        self.course_ul = Course.objects.create(
-            title="Unsupervised learning",
-        )
-        self.course_ul.fields.set([self.field_ds])
-
-        self.group_ie1 = UniversityGroup.objects.create(
-            short_name="IE-401",
-            specialization=self.specialization_ec
-        )
-
-        self.student_dk = get_user_model().objects.create(
-            username="dianakarpenko",
-            first_name="Diana",
-            last_name="Karpenko",
-            group=self.group_ie1,
-            password="hellogorgeous"
-        )
-        self.student_dk.courses.set([self.course_ul])
-
-        self.student_kv = get_user_model().objects.create(
-            username="katerynavasylieva",
-            first_name="Kateryna",
-            last_name="Vasylieva",
-            group=self.group_ie1,
-            password="hellogorgeous"
-        )
+        create_initial_data(self)
 
     def test_course_create_form(self):
 
         form_data = {
             "title": "Supervised learning",
-            "fields": [self.field_ds, self.field_m],
+            "fields": [self.field_1, self.field_2],
         }
 
         form = CourseCreateForm(data=form_data)
@@ -87,7 +36,7 @@ class FormTests(TestCase):
         form_data = {
             "title": "Unsupervised learning",
             "fields": [
-                self.field_ds, self.field_m, self.field_cs, self.field_e
+                self.field_1, self.field_2, self.field_3, self.field_4
             ],
         }
 
@@ -98,37 +47,37 @@ class FormTests(TestCase):
     def test_course_update_fields_form(self):
 
         form_data = {
-            "fields": [self.field_ds, self.field_m]
+            "fields": [self.field_1, self.field_2]
         }
 
-        form = CourseUpdateFieldsForm(data=form_data, instance=self.course_ul)
+        form = CourseUpdateFieldsForm(data=form_data, instance=self.course_1)
 
         self.assertTrue(form.is_valid())
         form.save()
         self.assertEqual(
             form_data["fields"],
-            list(self.course_ul.fields.all())
+            list(self.course_1.fields.all())
         )
 
     def test_course_update_form_with_more_than_3_fields(self):
 
         form_data = {
             "fields": [
-                self.field_ds, self.field_m, self.field_cs, self.field_e
+                self.field_1, self.field_2, self.field_3, self.field_4
             ]
         }
 
-        form = CourseUpdateFieldsForm(data=form_data, instance=self.course_ul)
+        form = CourseUpdateFieldsForm(data=form_data, instance=self.course_1)
 
         self.assertFalse(form.is_valid())
 
     def test_student_create_form(self):
 
         form_data = {
-            "username": "mariasamkova",
-            "first_name": "Maria",
+            "username": "dariasamkova",
+            "first_name": "Daria",
             "last_name": "Samkova",
-            "group": self.group_ie1,
+            "group": self.group_1,
             "password1": "hellobeautiful",
             "password2": "hellobeautiful",
         }
@@ -141,10 +90,10 @@ class FormTests(TestCase):
     def test_student_creation_form_lowercase_names(self):
 
         form_data = {
-            "username": "mariasamkova",
-            "first_name": "maria",
+            "username": "dariasamkova",
+            "first_name": "daria",
             "last_name": "samkova",
-            "group": self.group_ie1,
+            "group": self.group_1,
             "password1": "hellobeautiful",
             "password2": "hellobeautiful",
         }
@@ -152,7 +101,7 @@ class FormTests(TestCase):
         form = StudentCreationForm(data=form_data)
 
         self.assertTrue(form.is_valid())
-        self.assertEqual(form.cleaned_data["first_name"], "Maria")
+        self.assertEqual(form.cleaned_data["first_name"], "Daria")
         self.assertEqual(form.cleaned_data["last_name"], "Samkova")
 
     def test_student_create_form_with_existing_full_name(self):
@@ -161,7 +110,7 @@ class FormTests(TestCase):
             "username": "mariasamkova",
             "first_name": "Diana",
             "last_name": "Karpenko",
-            "group": self.group_ie1,
+            "group": self.group_1,
             "password1": "hellobeautiful",
             "password2": "hellobeautiful",
         }
@@ -172,32 +121,27 @@ class FormTests(TestCase):
 
     def test_student_update_form(self):
 
-        group_ie2 = UniversityGroup.objects.create(
-            short_name="IE-402",
-            specialization=self.specialization_ec
-        )
-
         form_data = {
-            "first_name": self.student_dk.first_name,
-            "last_name": self.student_dk.last_name,
-            "group": group_ie2,
+            "first_name": self.student_1.first_name,
+            "last_name": self.student_1.last_name,
+            "group": self.group_2,
         }
 
-        form = StudentUpdateForm(data=form_data, instance=self.student_dk)
+        form = StudentUpdateForm(data=form_data, instance=self.student_1)
 
         self.assertTrue(form.is_valid())
         form.save()
-        self.assertEqual(form_data["group"], self.student_dk.group)
+        self.assertEqual(form_data["group"], self.student_1.group)
 
     def test_student_update_form_existing_full_name(self):
 
         form_data = {
             "first_name": "Kateryna",
             "last_name": "Vasylieva",
-            "group": self.student_dk.group,
+            "group": self.student_1.group,
         }
 
-        form = CourseUpdateFieldsForm(data=form_data, instance=self.course_ul)
+        form = CourseUpdateFieldsForm(data=form_data, instance=self.course_1)
 
         self.assertFalse(form.is_valid())
 
@@ -206,12 +150,12 @@ class FormTests(TestCase):
         form_data = {
             "first_name": "ariana",
             "last_name": "zavalska",
-            "group": self.student_dk.group,
+            "group": self.student_1.group,
         }
 
-        form = StudentUpdateForm(data=form_data, instance=self.student_dk)
+        form = StudentUpdateForm(data=form_data, instance=self.student_1)
 
         self.assertTrue(form.is_valid())
         form.save()
-        self.assertEqual(self.student_dk.first_name, "Ariana")
-        self.assertEqual(self.student_dk.last_name, "Zavalska")
+        self.assertEqual(self.student_1.first_name, "Ariana")
+        self.assertEqual(self.student_1.last_name, "Zavalska")
