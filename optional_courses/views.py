@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 
@@ -160,7 +160,8 @@ class StudentDeleteView(LoginRequiredMixin, generic.DeleteView):
 @login_required
 def toggle_course_assignment(request, pk):
     student = get_user_model().objects.get(id=request.user.id)
-    if Course.objects.get(id=pk) in student.courses.all():
+    course = get_object_or_404(Course, id=pk)
+    if course in student.courses.all():
         student.courses.remove(pk)
     else:
         student.courses.add(pk)
