@@ -49,7 +49,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "optional_courses",
     "crispy_forms",
+    "crispy_bootstrap5",
     "debug_toolbar",
+    "bootstrap5",
 ]
 
 MIDDLEWARE = [

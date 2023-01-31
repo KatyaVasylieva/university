@@ -9,6 +9,7 @@ from optional_courses.models import (
     Course,
     UniversityGroup
 )
+from . import create_initial_data
 
 
 class PublicViewsTests(TestCase):
@@ -25,69 +26,9 @@ class PrivateViewsTests(TestCase):
 
     def setUp(self):
 
-        self.specialization_ec = Specialization.objects.create(
-            name="Economic cybernetics",
-            description="Economic systems, mathematical modeling"
-        )
+        create_initial_data(self)
 
-        self.specialization_cs = Specialization.objects.create(
-            name="Computer science",
-            description="Information systems, programming"
-        )
-
-        self.group_ie1 = UniversityGroup.objects.create(
-            short_name="IE-401",
-            specialization=self.specialization_ec
-        )
-
-        self.group_ie2 = UniversityGroup.objects.create(
-            short_name="IE-402",
-            specialization=self.specialization_ec
-        )
-
-        self.field_ds = Field.objects.create(
-            name="Data science"
-        )
-
-        self.field_m = Field.objects.create(
-            name="Math and logic"
-        )
-
-        self.course_ul = Course.objects.create(
-            title="Unsupervised learning"
-        )
-        self.course_ul.fields.set([self.field_ds])
-
-        self.course_cg = Course.objects.create(
-            title="Combinatorial game theory"
-        )
-        self.course_cg.fields.set([self.field_m])
-
-        self.student_ms = get_user_model().objects.create(
-            username="mariasamkova",
-            first_name="Maria",
-            last_name="Samkova",
-            group=self.group_ie1,
-            password="hellobeautiful"
-        )
-        self.student_ms.courses.set([self.course_ul])
-
-        self.student_dk = get_user_model().objects.create(
-            username="dianakarpenko",
-            first_name="Diana",
-            last_name="Karpenko",
-            group=self.group_ie2,
-            password="hellogorgeous"
-        )
-        self.student_dk.courses.set([self.course_ul, self.course_cg])
-
-        self.user = get_user_model().objects.create(
-            username="katerynavasylieva",
-            first_name="Kateryna",
-            last_name="Vasylieva",
-            group=self.group_ie1,
-            password="testuserpassword"
-        )
+        self.user = self.student_3
         self.client = Client()
         self.client.force_login(self.user)
 
@@ -137,7 +78,7 @@ class PrivateViewsTests(TestCase):
         response = self.client.get(
             reverse(
                 "optional-courses:course-detail",
-                kwargs={"pk": self.course_ul.pk}
+                kwargs={"pk": self.course_1.pk}
             )
         )
         self.assertEqual(response.status_code, 200)
@@ -145,16 +86,16 @@ class PrivateViewsTests(TestCase):
 
         self.client.get(reverse(
             "optional-courses:course-detail",
-            kwargs={"pk": self.course_ul.pk}
+            kwargs={"pk": self.course_1.pk}
         ) + "toggle-course-assignment/")
 
         response_after_assign = self.client.get(
             reverse(
                 "optional-courses:course-detail",
-                kwargs={"pk": self.course_ul.pk}
+                kwargs={"pk": self.course_1.pk}
             )
         )
-        self.assertTrue(self.user in self.course_ul.students.all())
+        self.assertTrue(self.user in self.course_1.students.all())
         self.assertContains(
             response_after_assign, "Remove me from this course", html=True
         )
@@ -162,22 +103,35 @@ class PrivateViewsTests(TestCase):
         self.client.get(
             reverse(
                 "optional-courses:course-detail",
-                kwargs={"pk": self.course_ul.pk}
+                kwargs={"pk": self.course_1.pk}
             ) + "toggle-course-assignment/"
         )
 
         response_after_remove = self.client.get(
             reverse(
                 "optional-courses:course-detail",
-                kwargs={"pk": self.course_ul.pk}
+                kwargs={"pk": self.course_1.pk}
             )
         )
-        self.assertFalse(self.user in self.course_ul.students.all())
+        self.assertFalse(self.user in self.course_1.students.all())
         self.assertContains(
             response_after_remove,
             "Assign me to this course",
             html=True
         )
+
+    def test_toggle_course_assignment_view_with_non_existing_course(self):
+
+        non_existing_id = Course.objects.latest("id").id + 1
+
+        response = self.client.get(
+            reverse(
+                "optional-courses:course-detail",
+                kwargs={"pk": non_existing_id}
+            )
+        )
+
+        self.assertEqual(response.status_code, 404)
 
     def test_course_list_view_search_by_title(self):
         form_data = {
