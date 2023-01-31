@@ -120,6 +120,19 @@ class PrivateViewsTests(TestCase):
             html=True
         )
 
+    def test_toggle_course_assignment_view_with_non_existing_course(self):
+
+        non_existing_id = Course.objects.latest("id").id + 1
+
+        response = self.client.get(
+            reverse(
+                "optional-courses:course-detail",
+                kwargs={"pk": non_existing_id}
+            )
+        )
+
+        self.assertEqual(response.status_code, 404)
+
     def test_course_list_view_search_by_title(self):
         form_data = {
             "title": "m"
