@@ -43,7 +43,7 @@ You can use the following user to login:
 
 * Authentication functionality for Student(User)
 * Create/update/delete functionality for courses and students directly from website interface
-* Possibility to assign or remove User form particular course
+* Possibility to assign or remove User from the particular course
 
 ## Demo
 ![Login interface](static/img/readme/login_demo.png)
